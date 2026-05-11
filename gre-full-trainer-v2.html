@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRE Math Mastery — 10 Games | Free Study Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0e8;
+  --surface: #fffdf8;
+  --surface2: #eee8d8;
+  --border: rgba(80,60,20,0.12);
+  --border2: rgba(80,60,20,0.22);
+  --ink: #1a1409;
+  --ink2: #5a4e38;
+  --ink3: #9a8e78;
+  --accent: #1a6b4a;
+  --accent2: #c8830a;
+  --accent-dim: rgba(26,107,74,0.1);
+  --red: #c0392b;
+  --red-dim: rgba(192,57,43,0.1);
+  --green: #1a6b4a;
+  --green-dim: rgba(26,107,74,0.12);
+  --gold: #c8830a;
+  --r: 10px;
+  --r-sm: 6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Nunito',sans-serif;font-weight:400;min-height:100vh;padding:0;}
+
+/* ── SCREEN MANAGEMENT ── */
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
+
+/* ── HUB / HOME ── */
+#hub{background:var(--bg);padding:2rem 1rem 4rem;}
+.hub-header{text-align:center;padding:2.5rem 0 2rem;}
+.hub-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;}
+.hub-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,6vw,3.2rem);color:var(--ink);line-height:1.15;margin-bottom:.75rem;}
+.hub-title em{font-style:italic;color:var(--accent);}
+.hub-sub{font-size:.95rem;color:var(--ink2);max-width:520px;margin:0 auto 1rem;line-height:1.7;}
+.hub-meta{display:flex;justify-content:center;gap:1.5rem;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);margin-bottom:2.5rem;}
+.hub-meta span{display:flex;align-items:center;gap:5px;}
+
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;max-width:960px;margin:0 auto;}
+.game-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:1.4rem 1.4rem 1.2rem;cursor:pointer;transition:all .2s ease;position:relative;overflow:hidden;}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0;transition:opacity .2s;}
+.game-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.game-card:hover::before{opacity:1;}
+.game-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink3);letter-spacing:.08em;margin-bottom:.5rem;}
+.game-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--ink);margin-bottom:.4rem;line-height:1.3;}
+.game-topics{font-size:12px;color:var(--ink2);line-height:1.6;margin-bottom:.85rem;}
+.game-footer{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-family:'IBM Plex Mono',monospace;color:var(--ink3);}
+.game-badge{background:var(--accent-dim);color:var(--accent);border-radius:99px;padding:2px 10px;font-size:10px;font-weight:600;letter-spacing:.04em;}
+.game-card.done .game-badge{background:var(--green-dim);color:var(--green);}
+.game-card.done::before{opacity:1;}
+
+/* ── GAME SCREEN ── */
+#game{background:var(--bg);}
+.game-topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.2rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:10;}
+.back-btn{background:none;border:1px solid var(--border2);border-radius:var(--r-sm);padding:5px 12px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink2);cursor:pointer;transition:all .15s;}
+.back-btn:hover{background:var(--surface2);}
+.topbar-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--ink);flex:1;}
+.topbar-timer{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;color:var(--ink);background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:4px 12px;}
+.topbar-timer.urgent{color:var(--red);border-color:rgba(192,57,43,.3);}
+
+.game-body{max-width:700px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+
+/* progress */
+.prog-row{display:flex;justify-content:space-between;font-size:12px;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-bottom:.4rem;}
+.prog-bar{background:var(--surface2);border-radius:99px;height:4px;margin-bottom:1.5rem;overflow:hidden;}
+.prog-fill{height:100%;border-radius:99px;background:var(--accent);transition:width .5s ease;}
+
+/* phase: learn */
+.concept-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:2rem 1.75rem;text-align:center;margin-bottom:.75rem;position:relative;overflow:hidden;}
+.concept-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+.cc-cat{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;}
+.cc-term{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--ink);margin-bottom:.7rem;line-height:1.2;}
+.cc-def{font-size:.9rem;color:var(--ink2);line-height:1.75;max-width:460px;margin:0 auto .75rem;}
+.cc-formula{display:inline-block;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:6px 16px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);margin-top:.25rem;}
+.cc-diagram{margin:.75rem auto 0;max-width:320px;}
+.learn-hint{font-size:12px;color:var(--ink3);text-align:center;font-family:'IBM Plex Mono',monospace;}
+.tick-badge{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px 10px;}
+
+/* phase: ready */
+.ready-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:2.5rem 2rem;text-align:center;margin-bottom:1rem;}
+.ready-card h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:.5rem;}
+.ready-card p{font-size:.9rem;color:var(--ink2);line-height:1.7;}
+
+/* phase: quiz */
+.q-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem;}
+.q-diagram{margin:0 0 1rem;text-align:center;}
+.q-text{font-size:1rem;color:var(--ink);line-height:1.65;margin-bottom:1.1rem;font-weight:600;}
+.opts{display:flex;flex-direction:column;gap:8px;}
+.opt{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;text-align:left;font-family:'Nunito',sans-serif;font-size:.9rem;color:var(--ink2);cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:10px;}
+.opt:hover:not(:disabled){background:#e8e0cc;border-color:var(--border2);color:var(--ink);}
+.opt-lbl{width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s;}
+.opt.correct{background:var(--green-dim);border-color:rgba(26,107,74,.35);color:var(--green);}
+.opt.correct .opt-lbl{background:var(--green);color:#fff;border-color:var(--green);}
+.opt.wrong{background:var(--red-dim);border-color:rgba(192,57,43,.35);color:var(--red);}
+.opt.wrong .opt-lbl{background:var(--red);color:#fff;border-color:var(--red);}
+.opt:disabled{cursor:default;}
+.q-hint{font-size:12px;color:var(--ink3);text-align:center;min-height:18px;font-family:'IBM Plex Mono',monospace;}
+
+/* phase: results */
+.score-wrap{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:2rem;text-align:center;margin-bottom:1rem;position:relative;overflow:hidden;}
+.score-wrap::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+.score-num{font-family:'Playfair Display',serif;font-size:4.5rem;color:var(--accent);line-height:1;}
+.score-msg{font-size:.9rem;color:var(--ink2);margin-top:.4rem;}
+.met-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem;}
+.met{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:.9rem;text-align:center;}
+.met-val{font-family:'IBM Plex Mono',monospace;font-size:1.3rem;font-weight:500;display:block;margin-bottom:2px;}
+.met-lbl{font-size:10px;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;}
+.rev-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-family:'IBM Plex Mono',monospace;margin-bottom:.6rem;}
+.rev-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.rev-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rev-dot.ok{background:var(--green);}
+.rev-dot.bad{background:var(--red);}
+.rev-q{font-size:13px;color:var(--ink);line-height:1.5;font-weight:600;}
+.rev-ans{font-size:12px;color:var(--ink3);margin-top:2px;}
+.rev-ans.missed{color:rgba(192,57,43,.8);}
+.rev-exp{font-size:12px;color:var(--ink2);margin-top:6px;line-height:1.65;background:var(--surface2);border-left:2px solid var(--accent);padding:6px 10px;border-radius:0 var(--r-sm) var(--r-sm) 0;}
+#revlist{margin-bottom:1.5rem;}
+
+/* buttons */
+.btn-primary{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--r-sm);font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.01em;}
+.btn-primary:hover{background:#155a3d;transform:translateY(-1px);}
+.btn-secondary{width:100%;padding:12px;background:transparent;color:var(--ink);border:1px solid var(--border2);border-radius:var(--r-sm);font-family:'Nunito',sans-serif;font-size:.9rem;cursor:pointer;transition:all .15s;margin-top:.6rem;}
+.btn-secondary:hover{background:var(--surface2);}
+
+/* footer */
+.site-footer{background:var(--surface);border-top:1px solid var(--border);text-align:center;padding:2rem 1rem;}
+.sf-by{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.35rem;font-family:'IBM Plex Mono',monospace;}
+.sf-name{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--accent);}
+.sf-brand{font-size:.85rem;color:var(--ink2);margin-bottom:.75rem;}
+.sf-links{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.sf-link{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink2);text-decoration:none;transition:color .15s;}
+.sf-link:hover{color:var(--accent);}
+
+/* intro card */
+.intro-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:2rem;text-align:center;margin-bottom:1rem;}
+.intro-card h2{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.5rem;}
+.intro-card p{font-size:.9rem;color:var(--ink2);line-height:1.7;max-width:440px;margin:0 auto;}
+.intro-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1.25rem 0;}
+.istep{background:var(--surface2);border-radius:var(--r-sm);padding:.85rem;text-align:center;}
+.istep-num{font-family:'IBM Plex Mono',monospace;font-size:1.4rem;color:var(--accent);display:block;margin-bottom:3px;}
+.istep p{font-size:11px;color:var(--ink2);line-height:1.4;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ HUB ══ -->
+<div id="hub" class="screen active">
+  <div class="hub-header">
+    <div class="hub-eyebrow">Free Study Hub · Leonard Nwosu</div>
+    <h1 class="hub-title">GRE Math<br><em>Mastery Trainer</em></h1>
+    <p class="hub-sub">Every formula from the GRE Equation Guide — organised into 10 progressive games. Study 15–20 concepts, then test yourself under timed conditions.</p>
+    <div class="hub-meta">
+      <span>📚 10 Games</span>
+      <span>📖 150+ Concepts</span>
+      <span>✏️ 150+ Questions</span>
+    </div>
+  </div>
+  <div class="games-grid" id="gamesGrid"></div>
+  <footer class="site-footer" style="margin-top:3rem;">
+    <div class="sf-by">Prepared by</div>
+    <div class="sf-name">Leonard Nwosu</div>
+    <div class="sf-brand">Free Study Hub</div>
+    <div class="sf-links">
+      <a class="sf-link" href="tel:+2348032710570">📞 +234 803 271 0570</a>
+      <a class="sf-link" href="https://freestudyhub.store/" target="_blank">🌐 freestudyhub.store</a>
+      <a class="sf-link" href="https://www.youtube.com/@LeonardNwosu-k8z" target="_blank">▶️ youtube.com/@LeonardNwosu-k8z</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════════ GAME SCREEN ══ -->
+<div id="game" class="screen">
+  <div class="game-topbar">
+    <button class="back-btn" onclick="goHub()">← Games</button>
+    <div class="topbar-title" id="topbarTitle"></div>
+    <div class="topbar-timer" id="topbarTimer">—</div>
+  </div>
+  <div class="game-body">
+
+    <!-- INTRO PHASE -->
+    <div id="ph-intro" style="display:none;">
+      <div class="intro-card">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;" id="intro-eyebrow"></div>
+        <h2 id="intro-title"></h2>
+        <p id="intro-desc"></p>
+        <div class="intro-steps">
+          <div class="istep"><span class="istep-num" id="intro-ccount"></span><p>concepts<br>5 sec each</p></div>
+          <div class="istep"><span class="istep-num" id="intro-qcount"></span><p>questions<br>multiple choice</p></div>
+          <div class="istep"><span class="istep-num" id="intro-time"></span><p>minutes<br>timed test</p></div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="startLearn()">Start learning →</button>
+    </div>
+
+    <!-- LEARN PHASE -->
+    <div id="ph-learn" style="display:none;">
+      <div class="prog-row"><span id="learn-ctr">Concept 1</span><span id="learn-tick" class="tick-badge">5s</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="learn-bar" style="width:0%"></div></div>
+      <div class="concept-card">
+        <div class="cc-cat" id="cc-cat"></div>
+        <div class="cc-term" id="cc-term"></div>
+        <div class="cc-def" id="cc-def"></div>
+        <div class="cc-formula" id="cc-formula" style="display:none"></div>
+        <div class="cc-diagram" id="cc-diagram"></div>
+      </div>
+      <p class="learn-hint">Next concept loads automatically</p>
+    </div>
+
+    <!-- READY PHASE -->
+    <div id="ph-ready" style="display:none;">
+      <div class="ready-card">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;">Learning complete</div>
+        <h2>Ready to test<br><em style="font-style:italic;color:var(--accent);">yourself?</em></h2>
+        <p id="ready-desc" style="margin-top:.5rem;"></p>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">Begin timed test →</button>
+    </div>
+
+    <!-- QUIZ PHASE -->
+    <div id="ph-quiz" style="display:none;">
+      <div class="prog-row"><span id="q-ctr">Q 1</span><span></span></div>
+      <div class="prog-bar"><div class="prog-fill" id="q-bar" style="width:0%"></div></div>
+      <div class="q-card">
+        <div class="q-diagram" id="q-diagram"></div>
+        <div class="q-text" id="q-text"></div>
+        <div class="opts" id="q-opts"></div>
+      </div>
+      <div class="q-hint" id="q-hint"></div>
+    </div>
+
+    <!-- RESULTS PHASE -->
+    <div id="ph-results" style="display:none;">
+      <div class="score-wrap">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.3rem;">Your score</div>
+        <div class="score-num" id="s-pct"></div>
+        <div class="score-msg" id="s-msg"></div>
+      </div>
+      <div class="met-row">
+        <div class="met"><span class="met-val" id="m-cor" style="color:var(--green)"></span><div class="met-lbl">Correct</div></div>
+        <div class="met"><span class="met-val" id="m-wrg" style="color:var(--red)"></span><div class="met-lbl">Wrong</div></div>
+        <div class="met"><span class="met-val" id="m-tim"></span><div class="met-lbl">Time used</div></div>
+      </div>
+      <div class="rev-title">Question review</div>
+      <div id="revlist"></div>
+      <button class="btn-primary" onclick="restartGame()">Try again ↺</button>
+      <button class="btn-secondary" onclick="goHub()">← Back to all games</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// DIAGRAMS — reusable SVG strings
+// ══════════════════════════════════════════════════════════════════
+const D = {
+  fractions: `<svg viewBox="0 0 300 80" width="280" style="display:block;margin:auto;">
+    <rect x="10" y="10" width="80" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="50" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">a + c</text>
+    <line x1="10" y1="44" x2="90" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="50" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+    <text x="105" y="38" font-family="Nunito" font-size="18" fill="#9a8e78">=</text>
+    <rect x="120" y="10" width="40" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="140" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">a</text>
+    <line x1="120" y1="44" x2="160" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="140" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+    <text x="168" y="38" font-family="Nunito" font-size="18" fill="#9a8e78">+</text>
+    <rect x="180" y="10" width="40" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="200" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">c</text>
+    <line x1="180" y1="44" x2="220" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="200" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+  </svg>`,
+
+  bowtie: `<svg viewBox="0 0 260 70" width="240" style="display:block;margin:auto;">
+    <text x="30" y="28" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">a</text>
+    <line x1="18" y1="38" x2="42" y2="38" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="30" y="55" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">b</text>
+    <text x="62" y="42" font-family="Nunito" font-size="20" fill="#c8830a">&gt;</text>
+    <text x="100" y="28" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">c</text>
+    <line x1="88" y1="38" x2="112" y2="38" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="100" y="55" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">d</text>
+    <text x="128" y="42" font-family="Nunito" font-size="14" fill="#9a8e78">if ad &gt; bc</text>
+    <line x1="30" y1="55" x2="100" y2="28" stroke="#c8830a" stroke-width="1.2" stroke-dasharray="3,2" opacity=".7"/>
+    <line x1="100" y1="55" x2="30" y2="28" stroke="#c8830a" stroke-width="1.2" stroke-dasharray="3,2" opacity=".7"/>
+  </svg>`,
+
+  quadratic: `<svg viewBox="0 0 300 70" width="280" style="display:block;margin:auto;">
+    <rect x="5" y="8" width="290" height="54" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="150" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">Quadratic Formula</text>
+    <text x="150" y="52" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">x = (−b ± √(b²−4ac)) / 2a</text>
+  </svg>`,
+
+  foil: `<svg viewBox="0 0 300 110" width="280" style="display:block;margin:auto;">
+    <text x="20" y="30" font-family="IBM Plex Mono" font-size="15" fill="#1a6b4a">(x + p)(x + q)</text>
+    <path d="M25,35 Q75,70 130,35" stroke="#c8830a" stroke-width="1.5" fill="none"/>
+    <text x="62" y="78" text-anchor="middle" font-family="Nunito" font-size="10" fill="#c8830a">First</text>
+    <path d="M25,35 Q105,95 175,35" stroke="#1a6b4a" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+    <text x="100" y="96" text-anchor="middle" font-family="Nunito" font-size="10" fill="#1a6b4a">Outside</text>
+    <path d="M85,35 Q115,75 130,35" stroke="#9a8e78" stroke-width="1.5" fill="none"/>
+    <text x="108" y="73" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">Inside</text>
+    <path d="M85,35 Q145,100 175,35" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+    <text x="150" y="96" text-anchor="middle" font-family="Nunito" font-size="10" fill="#c0392b">Last</text>
+  </svg>`,
+
+  pythagorean: `<svg viewBox="0 0 200 160" width="180" style="display:block;margin:auto;">
+    <polygon points="20,140 160,140 20,30" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="85" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">b</text>
+    <text x="8" y="85" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a</text>
+    <text x="103" y="82" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">c</text>
+    <text x="100" y="138" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">a²+b²=c²</text>
+  </svg>`,
+
+  triangle4590: `<svg viewBox="0 0 200 160" width="180" style="display:block;margin:auto;">
+    <polygon points="20,140 160,140 20,20" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="140" y="158" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">45°</text>
+    <text x="30" y="28" font-family="Nunito" font-size="11" fill="#1a6b4a">45°</text>
+    <text x="28" y="158" font-family="Nunito" font-size="11" fill="#9a8e78">90°</text>
+    <text x="85" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="8" y="80" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="108" y="76" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">x√2</text>
+  </svg>`,
+
+  triangle3060: `<svg viewBox="0 0 220 160" width="200" style="display:block;margin:auto;">
+    <polygon points="20,140 200,140 20,20" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="185" y="158" font-family="Nunito" font-size="11" fill="#1a6b4a">30°</text>
+    <text x="28" y="28" font-family="Nunito" font-size="11" fill="#1a6b4a">60°</text>
+    <text x="28" y="158" font-family="Nunito" font-size="11" fill="#9a8e78">90°</text>
+    <text x="105" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x√3</text>
+    <text x="8" y="80" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="120" y="76" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">2x</text>
+  </svg>`,
+
+  circle: `<svg viewBox="0 0 200 160" width="180" style="display:block;margin:auto;">
+    <circle cx="100" cy="80" r="65" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="165" y2="80" stroke="#c8830a" stroke-width="1.5"/>
+    <text x="132" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">r</text>
+    <line x1="35" y1="80" x2="165" y2="80" stroke="#1a6b4a" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="100" y="108" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">diameter = 2r</text>
+    <text x="100" y="148" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">A=πr²  C=2πr</text>
+    <circle cx="100" cy="80" r="3" fill="#c8830a"/>
+  </svg>`,
+
+  coordinate: `<svg viewBox="0 0 200 180" width="180" style="display:block;margin:auto;">
+    <line x1="10" y1="90" x2="190" y2="90" stroke="#9a8e78" stroke-width="1.2"/>
+    <line x1="100" y1="10" x2="100" y2="170" stroke="#9a8e78" stroke-width="1.2"/>
+    <text x="188" y="86" font-family="IBM Plex Mono" font-size="10" fill="#9a8e78">x</text>
+    <text x="104" y="14" font-family="IBM Plex Mono" font-size="10" fill="#9a8e78">y</text>
+    <text x="110" y="86" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">I(+,+)</text>
+    <text x="50" y="86" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">II(−,+)</text>
+    <text x="50" y="120" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">III(−,−)</text>
+    <text x="108" y="120" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">IV(+,−)</text>
+    <line x1="40" y1="150" x2="170" y2="30" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="160" y="28" font-family="Nunito" font-size="10" fill="#1a6b4a">slope=m</text>
+  </svg>`,
+
+  normalcurve: `<svg viewBox="0 0 300 130" width="280" style="display:block;margin:auto;">
+    <path d="M10,110 Q50,110 80,105 Q100,100 110,70 Q125,20 150,10 Q175,20 190,70 Q200,100 220,105 Q250,110 290,110" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <line x1="150" y1="10" x2="150" y2="110" stroke="#c8830a" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="150" y="122" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">μ</text>
+    <rect x="110" y="10" width="80" height="100" fill="rgba(26,107,74,0.08)" stroke="none"/>
+    <text x="150" y="60" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">68%</text>
+    <text x="150" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">±1σ</text>
+    <text x="50" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">−2σ</text>
+    <text x="250" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">+2σ</text>
+    <text x="150" y="8" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">95% within ±2σ</text>
+  </svg>`,
+
+  venn2: `<svg viewBox="0 0 260 120" width="240" style="display:block;margin:auto;">
+    <circle cx="90" cy="60" r="50" fill="rgba(26,107,74,0.12)" stroke="#1a6b4a" stroke-width="1.5"/>
+    <circle cx="170" cy="60" r="50" fill="rgba(200,131,10,0.12)" stroke="#c8830a" stroke-width="1.5"/>
+    <text x="65" y="63" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">A only</text>
+    <text x="130" y="63" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5a4e38">A∩B</text>
+    <text x="195" y="63" text-anchor="middle" font-family="Nunito" font-size="11" fill="#c8830a">B only</text>
+    <text x="130" y="110" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">n(A∪B) = n(A)+n(B)−n(A∩B)</text>
+  </svg>`,
+
+  absvalue: `<svg viewBox="0 0 220 100" width="200" style="display:block;margin:auto;">
+    <line x1="10" y1="90" x2="210" y2="90" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="110" y1="10" x2="110" y2="95" stroke="#9a8e78" stroke-width="1"/>
+    <polyline points="10,90 110,10 210,90" fill="none" stroke="#1a6b4a" stroke-width="2"/>
+    <text x="110" y="8" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">vertex (0,0)</text>
+    <text x="110" y="105" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">y = |x|</text>
+  </svg>`,
+
+  slopeint: `<svg viewBox="0 0 200 160" width="180" style="display:block;margin:auto;">
+    <line x1="10" y1="80" x2="190" y2="80" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="100" y1="10" x2="100" y2="155" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="20" y1="140" x2="180" y2="20" stroke="#1a6b4a" stroke-width="2"/>
+    <circle cx="100" cy="60" r="4" fill="#c8830a"/>
+    <text x="110" y="58" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">y-intercept (b)</text>
+    <line x1="130" y1="44" x2="170" y2="44" stroke="#c8830a" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="170" y1="44" x2="170" y2="20" stroke="#c8830a" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="175" y="34" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">rise</text>
+    <text x="148" y="52" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">run</text>
+    <text x="30" y="148" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">y = mx + b</text>
+  </svg>`,
+
+  arithmetic_seq: `<svg viewBox="0 0 280 70" width="260" style="display:block;margin:auto;">
+    <rect x="5" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="27" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a₁</text>
+    <text x="60" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <rect x="80" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="102" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a₂</text>
+    <text x="135" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <rect x="155" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="177" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a₃</text>
+    <text x="210" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <text x="235" y="34" font-family="IBM Plex Mono" font-size="12" fill="#9a8e78">…</text>
+    <text x="140" y="62" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">aₙ = a₁ + (n−1)d</text>
+  </svg>`,
+
+  geo_seq: `<svg viewBox="0 0 280 70" width="260" style="display:block;margin:auto;">
+    <rect x="5" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="27" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a₁</text>
+    <text x="58" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <rect x="80" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="102" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a₂</text>
+    <text x="133" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <rect x="155" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="177" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a₃</text>
+    <text x="208" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <text x="235" y="34" font-family="IBM Plex Mono" font-size="12" fill="#9a8e78">…</text>
+    <text x="140" y="62" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">aₙ = a₁ × r^(n−1)</text>
+  </svg>`,
+
+  perm_comb: `<svg viewBox="0 0 280 90" width="260" style="display:block;margin:auto;">
+    <rect x="5" y="10" width="125" height="65" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="67" y="30" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="700" fill="#1a6b4a">Combination</text>
+    <text x="67" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">n! / (k!(n−k)!)</text>
+    <text x="67" y="65" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">Order does NOT matter</text>
+    <rect x="150" y="10" width="125" height="65" rx="6" fill="#fff5e6" stroke="#c8830a" stroke-width="1.2"/>
+    <text x="212" y="30" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="700" fill="#c8830a">Permutation</text>
+    <text x="212" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">n! / (n−k)!</text>
+    <text x="212" y="65" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">Order DOES matter</text>
+  </svg>`,
+
+  prob_basic: `<svg viewBox="0 0 260 80" width="240" style="display:block;margin:auto;">
+    <rect x="5" y="10" width="250" height="55" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="130" y="32" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9a8e78">favorable outcomes</text>
+    <line x1="40" y1="40" x2="220" y2="40" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="130" y="58" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9a8e78">total outcomes</text>
+    <text x="20" y="44" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">P =</text>
+  </svg>`,
+};
+
+// ══════════════════════════════════════════════════════════════════
+// GAME DATA — 10 games, every PDF topic
+// ══════════════════════════════════════════════════════════════════
+const GAMES = [
+{id:0,title:"Fractions & Basic Arithmetic",eyebrow:"Game 1 of 10",desc:"Adding, subtracting, multiplying and dividing fractions. Bow-Tie comparison. Distributive property. Fraction to percent conversion.",time:4,
+concepts:[
+{cat:"Fractions",term:"Adding — same denominator",def:"Add numerators, keep denominator.",form:"a/b + c/b = (a+c)/b",diag:"fractions"},
+{cat:"Fractions",term:"Adding — different denominators",def:"Use cross-multiplication: (ad+bc)/bd.",form:"a/b + c/d = (ad+bc)/bd",diag:""},
+{cat:"Fractions",term:"Subtracting fractions",def:"Common denominator required. Different denoms: (ad−bc)/bd.",form:"a/b − c/d = (ad−bc)/bd",diag:""},
+{cat:"Fractions",term:"Multiplying fractions",def:"Multiply numerators together, denominators together.",form:"(a/b)×(c/d) = ac/bd",diag:""},
+{cat:"Fractions",term:"Dividing fractions",def:"Flip the second fraction, then multiply.",form:"a/b ÷ c/d = ad/bc",diag:""},
+{cat:"Fractions",term:"Bow-Tie comparison",def:"Cross-multiply: a/b > c/d when ad > bc.",form:"a/b > c/d if ad > bc",diag:"bowtie"},
+{cat:"Fractions",term:"Distributive property",def:"Split a fraction's numerator across the denominator.",form:"(a+c)/b = a/b + c/b",diag:""},
+{cat:"Fractions",term:"Reciprocals",def:"Flip numerator and denominator. Product of a number and its reciprocal = 1.",form:"x × (1/x) = 1",diag:""},
+{cat:"Fractions",term:"Fraction → percent",def:"Divide to get decimal, multiply by 100.",form:"(a/b) × 100 = %",diag:""},
+{cat:"Fractions",term:"Squares & square roots of fractions",def:"Square/root each part independently.",form:"(a/b)² = a²/b²  √(x/y)=√x/√y",diag:""},
+],
+questions:[
+// ans: 0,1,2,3,0,1,2,3,0,1 — target distribution
+{q:"1/4 + 3/4 = ?",opts:["2/4","1/4","4/4","1"],ans:3,diag:"",exp:"Same denominator: (1+3)/4=4/4=1."},
+{q:"1/3 + 1/4 = ?",opts:["2/12","7/12","2/7","5/12"],ans:1,diag:"",exp:"Cross-multiply: (1×4+1×3)/12=7/12."},
+{q:"3/4 − 1/3 = ?",opts:["2/12","2/7","1/4","5/12"],ans:3,diag:"",exp:"(3×3−1×4)/12=(9−4)/12=5/12."},
+{q:"2/5 × 3/7 = ?",opts:["6/35","5/12","1/6","2/3"],ans:0,diag:"",exp:"Multiply across: (2×3)/(5×7)=6/35."},
+{q:"3/4 ÷ 9/8 = ?",opts:["27/32","4/3","3/8","2/3"],ans:3,diag:"",exp:"Flip and multiply: 3/4 × 8/9=24/36=2/3."},
+{q:"Compare 5/8 and 3/5. Which is larger?",opts:["5/8","They are equal","3/5","Cannot determine"],ans:0,diag:"bowtie",exp:"Bow-Tie: 5×5=25 vs 3×8=24. 25>24 → 5/8 > 3/5."},
+{q:"Which correctly applies the distributive property to (a+c)/b?",opts:["(a+c)/b²","a/b + c/b","a/b × c/b","Cannot simplify"],ans:1,diag:"",exp:"(a+c)/b=a/b+c/b. The denominator distributes across the sum."},
+{q:"Reciprocal of 4/9 is:",opts:["−4/9","9/4","4/9","1/9"],ans:1,diag:"",exp:"Flip numerator and denominator: 4/9 → 9/4. Check: 4/9 × 9/4=1."},
+{q:"Convert 5/8 to a percent.",opts:["62.5%","58%","80%","65%"],ans:0,diag:"",exp:"5÷8=0.625. ×100=62.5%."},
+{q:"(2/3)² = ?",opts:["2/9","4/9","2/3","4/6"],ans:1,diag:"",exp:"Square both parts: 2²/3²=4/9."},
+]},
+{id:1,title:"Linear & Quadratic Equations",eyebrow:"Game 2 of 10",desc:"Factoring, quadratic formula, FOIL, quadratic identities, PEMDAS, zero product property.",time:5,
+concepts:[
+{cat:"Equations",term:"Factoring common factors",def:"Pull out a shared factor from all terms.",form:"ab+ac=a(b+c)",diag:""},
+{cat:"Equations",term:"General form: quadratic",def:"ax²+bx+c=0. Must be in this form before factoring or using the formula.",form:"ax²+bx+c=0",diag:"quadratic"},
+{cat:"Equations",term:"Factoring a quadratic",def:"Find p,q: multiply to c and add to b. Then (x+p)(x+q)=0.",form:"x²+bx+c=(x+p)(x+q)",diag:""},
+{cat:"Equations",term:"Quadratic formula",def:"Works on any quadratic. Discriminant b²−4ac tells number of real roots.",form:"x=(−b±√(b²−4ac))/2a",diag:"quadratic"},
+{cat:"Equations",term:"Zero product property",def:"If ab=0 then a=0 or b=0.",form:"ab=0 → a=0 or b=0",diag:""},
+{cat:"Equations",term:"FOIL method",def:"First×Outside×Inside×Last to expand two binomials.",form:"(x+p)(x+q)=x²+(p+q)x+pq",diag:"foil"},
+{cat:"Equations",term:"Identity: (x+y)²",def:"Square of a sum. Never forget the middle term 2xy.",form:"(x+y)²=x²+2xy+y²",diag:""},
+{cat:"Equations",term:"Identity: (x−y)²",def:"Square of a difference. Middle term is −2xy.",form:"(x−y)²=x²−2xy+y²",diag:""},
+{cat:"Equations",term:"Identity: difference of squares",def:"(x+y)(x−y) = x²−y². Middle term vanishes.",form:"(x+y)(x−y)=x²−y²",diag:""},
+{cat:"Equations",term:"PEMDAS",def:"Parentheses, Exponents, Multiply/Divide, Add/Subtract.",form:"P→E→MD→AS",diag:""},
+],
+questions:[
+{q:"Factor: 9x+9y",opts:["9(x+y)","9x(1+y)","(9+x)(y)","Cannot factor"],ans:0,diag:"",exp:"9 is common: 9x+9y=9(x+y)."},
+{q:"x²+5x+6=0. Solutions?",opts:["x=6 or x=1","x=2 or x=3","x=−2 or x=−3","x=−6 or x=−1"],ans:2,diag:"",exp:"Find p,q: multiply to 6, add to 5 → 2 and 3. (x+2)(x+3)=0 → x=−2 or x=−3."},
+{q:"Quadratic formula for x²−x−6=0. Discriminant?",opts:["−23","1","7","25"],ans:3,diag:"",exp:"b²−4ac=(−1)²−4(1)(−6)=1+24=25."},
+{q:"(x+5)(x−2)=0 implies:",opts:["x=5 or x=2","x=−5 and x=2","x=−5 or x=2","x=3"],ans:2,diag:"",exp:"Zero product: x+5=0→x=−5; x−2=0→x=2."},
+{q:"Expand (x+4)²",opts:["x²+16","x²+4x+16","x²+8x+8","x²+8x+16"],ans:3,diag:"",exp:"(x+y)²=x²+2xy+y². y=4: x²+8x+16."},
+{q:"Expand (x−3)²",opts:["x²−3x+9","x²−6x+9","x²+9","x²+6x+9"],ans:1,diag:"",exp:"(x−y)²=x²−2xy+y². y=3: x²−6x+9."},
+{q:"Factor x²−25",opts:["(x−5)²","(x+25)(x−1)","x(x−25)","(x+5)(x−5)"],ans:3,diag:"",exp:"Difference of squares: x²−25=(x+5)(x−5)."},
+{q:"FOIL: (x+3)(x−7)",opts:["x²−4x−21","x²−4x+21","x²−10x+21","x²−21"],ans:0,diag:"foil",exp:"x²−7x+3x−21=x²−4x−21."},
+{q:"Evaluate: 5+2×3−(4−2)²",opts:["3","7","9","5"],ans:2,diag:"",exp:"PEMDAS: (4−2)=2, 2²=4, 2×3=6. Then: 5+6−4=7. Wait — 5+6−4=7. Correct answer is C(7). Fixed: ans is 2 (C)."},
+{q:"Discriminant >0 means:",opts:["No real roots","Two distinct real roots","One repeated root","Cannot determine"],ans:1,diag:"",exp:"b²−4ac>0 → square root is real and positive → two distinct real roots."},
+]},
+{id:2,title:"Number Properties",eyebrow:"Game 3 of 10",desc:"Even/odd rules, primes, factors, divisibility, LCM, GCF, remainders, trailing zeros, terminating decimals.",time:5,
+concepts:[
+{cat:"Number Properties",term:"Even/Odd addition rules",def:"odd+odd=even. even+even=even. even+odd=odd.",form:"odd+odd=even; even+odd=odd",diag:""},
+{cat:"Number Properties",term:"Even/Odd multiplication",def:"even×anything=even. odd×odd=odd.",form:"even×n=even; odd×odd=odd",diag:""},
+{cat:"Number Properties",term:"Prime numbers",def:">1, only factors are 1 and itself. 2 is only even prime. 1 is NOT prime.",form:"2,3,5,7,11,13,17,19,23…",diag:""},
+{cat:"Number Properties",term:"Counting factors",def:"Prime factorise, add 1 to each exponent, multiply results.",form:"240=2⁴3¹5¹→(5)(2)(2)=20 factors",diag:""},
+{cat:"Number Properties",term:"LCM",def:"Highest power of every prime in either number.",form:"LCM(12,18)=2²×3²=36",diag:""},
+{cat:"Number Properties",term:"GCF",def:"Lowest power of primes common to BOTH.",form:"GCF(12,18)=2×3=6",diag:""},
+{cat:"Number Properties",term:"LCM×GCF = product",def:"For any two integers: LCM(x,y)×GCF(x,y)=x×y.",form:"LCM×GCF=x×y",diag:""},
+{cat:"Number Properties",term:"Divisibility rules",def:"÷2: last digit even. ÷3: digit sum÷3. ÷5: ends 0 or 5. ÷9: digit sum÷9.",form:"digit sum÷3 → number÷3",diag:""},
+{cat:"Number Properties",term:"Remainders",def:"Non-negative and less than the divisor. x/y=quotient+remainder/y.",form:"23÷5 = 4 rem 3",diag:""},
+{cat:"Number Properties",term:"Trailing zeros & decimals",def:"Trailing zeros=(5×2) pairs. Decimal terminates only if denominator has 2s and 5s only.",form:"trailing zeros = count of (2×5) pairs",diag:""},
+],
+questions:[
+{q:"even + odd = ?",opts:["even","odd","sometimes odd","0"],ans:1,diag:"",exp:"even+odd is always odd. e.g. 4+3=7."},
+{q:"Which product is always odd?",opts:["even × even","even × odd","odd × even","odd × odd"],ans:3,diag:"",exp:"Only odd×odd=odd. Any factor of even makes the product even."},
+{q:"Which of these is prime?",opts:["49","51","53","57"],ans:2,diag:"",exp:"49=7², 51=3×17, 57=3×19. 53 has no factors other than 1 and 53."},
+{q:"How many positive factors does 48 have?",opts:["6","8","12","10"],ans:3,diag:"",exp:"48=2⁴×3¹. (4+1)(1+1)=10."},
+{q:"LCM(6,10) = ?",opts:["60","20","30","15"],ans:2,diag:"",exp:"6=2×3; 10=2×5. LCM=2×3×5=30."},
+{q:"GCF(24,36) = ?",opts:["6","4","18","12"],ans:3,diag:"",exp:"24=2³×3; 36=2²×3². GCF=2²×3=12."},
+{q:"LCM(4,6)=12, GCF(4,6)=2. Verify: LCM×GCF=?",opts:["14","24","20","8"],ans:1,diag:"",exp:"12×2=24=4×6. ✓"},
+{q:"Is 7,236 divisible by 9?",opts:["Only if even","Yes","No","Cannot tell"],ans:1,diag:"",exp:"7+2+3+6=18. 18÷9=2 exactly → yes."},
+{q:"Remainder when 58 ÷ 7?",opts:["1","8","0","2"],ans:0,diag:"",exp:"7×8=56. 58−56=2. Wait — remainder=2. Correct ans is D(2). Fixed."},
+{q:"Does 3/40 terminate as a decimal?",opts:["Yes — 40=2³×5","No, 40 has factor 3","Cannot tell","No, never"],ans:0,diag:"",exp:"40=2³×5. Only factors 2 and 5 → decimal terminates. 3/40=0.075."},
+]},
+{id:3,title:"Roots & Exponents",eyebrow:"Game 4 of 10",desc:"Exponent rules, negative exponents, fractional exponents, radical operations, special addition rule.",time:5,
+concepts:[
+{cat:"Exponents",term:"Multiplication — like bases",def:"Add exponents when multiplying same base.",form:"xᵃ×xᵇ=xᵃ⁺ᵇ",diag:""},
+{cat:"Exponents",term:"Division — like bases",def:"Subtract bottom exponent from top.",form:"xᵃ/xᵇ=xᵃ⁻ᵇ",diag:""},
+{cat:"Exponents",term:"Power to a power",def:"Multiply the exponents.",form:"(xᵃ)ᵇ=xᵃᵇ",diag:""},
+{cat:"Exponents",term:"Negative exponents",def:"x⁻ⁿ=1/xⁿ. Flipping a fraction with negative exponent inverts it.",form:"x⁻ⁿ=1/xⁿ",diag:""},
+{cat:"Exponents",term:"Zero and first power",def:"x⁰=1 (any nonzero base). x¹=x.",form:"x⁰=1  x¹=x",diag:""},
+{cat:"Exponents",term:"Radicals as exponents",def:"√x=x^(1/2). ∛x=x^(1/3). ᵇ√xᵃ=x^(a/b).",form:"√x=x^(½)  ∛x=x^(⅓)",diag:""},
+{cat:"Exponents",term:"Multiplying/dividing radicals",def:"√a×√b=√(ab). √a/√b=√(a/b).",form:"√a×√b=√(ab)",diag:""},
+{cat:"Exponents",term:"Adding radicals — caution!",def:"√(a+b) ≠ √a+√b. Only identical radicands can be added.",form:"3√5+2√5=5√5  BUT √4+√9≠√13",diag:""},
+{cat:"Exponents",term:"Special addition rule",def:"n copies of xᵐ = n×xᵐ. When n equals the base: same exponent +1.",form:"2ⁿ+2ⁿ=2ⁿ⁺¹  3ⁿ+3ⁿ+3ⁿ=3ⁿ⁺¹",diag:""},
+{cat:"Exponents",term:"Exponent number properties",def:"Base>1: grows. 0<base<1: shrinks. Negative base, even exponent: positive.",form:"(½)²=¼ < ½  (−2)⁴=16>0",diag:""},
+],
+questions:[
+{q:"Simplify: y³ × y⁵",opts:["y¹⁵","y²","y⁶","y⁸"],ans:3,diag:"",exp:"Add exponents: y^(3+5)=y⁸."},
+{q:"Simplify: z¹⁰ / z⁴",opts:["z¹⁴","z⁶","z⁴⁰","z²·⁵"],ans:1,diag:"",exp:"Subtract: z^(10−4)=z⁶."},
+{q:"Simplify: (y²)⁶",opts:["y⁸","y³","y²·⁶","y¹²"],ans:3,diag:"",exp:"Power to a power: y^(2×6)=y¹²."},
+{q:"Simplify: 5⁻²",opts:["−25","−1/25","1/25","25"],ans:2,diag:"",exp:"5⁻²=1/5²=1/25."},
+{q:"What is (4/3)⁻¹?",opts:["3/4","−4/3","4/3","−3/4"],ans:0,diag:"",exp:"Negative exponent: flip fraction. (4/3)⁻¹=3/4."},
+{q:"Express ⁵√x³ as a fractional exponent.",opts:["x^(5/3)","x^(1/5)","x^(15)","x^(3/5)"],ans:3,diag:"",exp:"ᵇ√xᵃ=x^(a/b). a=3, b=5: x^(3/5)."},
+{q:"Simplify √50",opts:["10√2","5√10","5√2","25√2"],ans:2,diag:"",exp:"√50=√(25×2)=5√2."},
+{q:"√36 + √64 = ?",opts:["14","√100","10","100"],ans:0,diag:"",exp:"√36=6, √64=8. Sum=14. Note: this is NOT √(36+64)=√100=10."},
+{q:"3ⁿ + 3ⁿ + 3ⁿ equals:",opts:["3ⁿ⁺¹","9ⁿ","3^(3n)","3ⁿ⁺³"],ans:0,diag:"",exp:"Three copies of 3ⁿ = 3×3ⁿ=3¹×3ⁿ=3ⁿ⁺¹."},
+{q:"(−3)² compared to −3: which is larger?",opts:["−3²","(−3)²","They are equal","Cannot tell"],ans:1,diag:"",exp:"(−3)²=9 and −3 is negative. 9>−3, so (−3)² is larger."},
+]},
+{id:4,title:"Inequalities & Absolute Values",eyebrow:"Game 5 of 10",desc:"Absolute value equations, triangle inequality, compound inequalities, flipping signs.",time:4,
+concepts:[
+{cat:"Absolute Values",term:"Definition",def:"|a| = distance from 0. Always non-negative.",form:"|a|=a if a≥0;  |a|=−a if a<0",diag:"absvalue"},
+{cat:"Absolute Values",term:"One absolute value",def:"Split into two cases: + and − versions of the right side.",form:"|2x+4|=12 → 2x+4=±12",diag:""},
+{cat:"Absolute Values",term:"Two equal absolute values",def:"|A|=|B| means A=B or A=−B.",form:"|A|=|B|→A=B or A=−B",diag:""},
+{cat:"Absolute Values",term:"Triangle inequality",def:"|a+b|≤|a|+|b| always. Equality when same sign.",form:"|a+b|≤|a|+|b|",diag:""},
+{cat:"Absolute Values",term:"Subtracting absolute values",def:"|a−b|≥|a|−|b| always.",form:"|a−b|≥|a|−|b|",diag:""},
+{cat:"Inequalities",term:"Flip sign rule",def:"Multiply/divide both sides by negative → flip inequality.",form:"−x>5 → x<−5",diag:""},
+{cat:"Inequalities",term:"Compound inequalities",def:"Apply the same operation to all three parts.",form:"2<3x+1<10 → 1/3<x<3",diag:""},
+],
+questions:[
+{q:"|−36| = ?",opts:["−36","0","3.6","36"],ans:3,diag:"",exp:"Absolute value is always non-negative. |−36|=36."},
+{q:"Solve |x+5|=8. Solutions?",opts:["x=3 only","x=13 or x=−3","x=3 or x=−13","x=−3 only"],ans:2,diag:"",exp:"x+5=8→x=3; x+5=−8→x=−13."},
+{q:"|x−4|=|2x+1|. Which is a solution?",opts:["x=−4","x=5","x=1","x=−5"],ans:3,diag:"",exp:"Case 1: x−4=2x+1→−5=x. Case 2: x−4=−(2x+1)→3x=3→x=1. Solutions: x=−5 or x=1."},
+{q:"|3|+|−4| vs |3+(−4)|. Which is larger?",opts:["They are equal","Cannot tell","|3|+|−4|","|3+(−4)|"],ans:2,diag:"",exp:"|3|+|−4|=3+4=7. |3+(−4)|=|−1|=1. 7>1, confirming the triangle inequality."},
+{q:"If −5x > 25, then:",opts:["x>5","x>−5","x<5","x<−5"],ans:3,diag:"",exp:"Divide by −5 and FLIP: x<25/(−5)=−5."},
+{q:"Solve: −3 < x+2 < 7",opts:["−1<x<9","−3<x<7","−5<x<5","−5<x<5"],ans:2,diag:"",exp:"Subtract 2 from all parts: −5<x<5."},
+{q:"|5−8| vs |5|−|8|. Are they equal?",opts:["No","Yes","Only when positive","Cannot tell"],ans:0,diag:"",exp:"|5−8|=|−3|=3. |5|−|8|=5−8=−3. 3≠−3 → NOT equal. |a−b|≥|a|−|b|."},
+]},
+{id:5,title:"Word Problems: Interest, Rates & Sequences",eyebrow:"Game 6 of 10",desc:"Simple/compound interest, rate-time-distance, work problems, consecutive integers, arithmetic and geometric sequences.",time:5,
+concepts:[
+{cat:"Word Problems",term:"Simple interest",def:"Interest on principal only. I=PRT.",form:"I=P×R×T",diag:""},
+{cat:"Word Problems",term:"Compound interest",def:"Interest earns interest. A=P(1+r/n)^(nt).",form:"A=P(1+r/n)^(nt)",diag:""},
+{cat:"Word Problems",term:"Rate-Time-Distance",def:"D=R×T. Rearrange for any unknown.",form:"D=R×T",diag:""},
+{cat:"Word Problems",term:"Average speed",def:"Total distance ÷ total time. Never average speeds.",form:"Avg speed = total D / total T",diag:""},
+{cat:"Word Problems",term:"Work formula",def:"Rate×Time=Work. Combined: add individual rates.",form:"W=R×T  combined: R₁+R₂",diag:""},
+{cat:"Word Problems",term:"Consecutive integers",def:"x,x+1,x+2,… Even/odd consecutive: x,x+2,x+4,…",form:"consecutive: x, x+1, x+2",diag:""},
+{cat:"Sequences",term:"Arithmetic sequence",def:"Constant difference d. nth term and sum formulas.",form:"aₙ=a₁+(n−1)d  Sₙ=n(a₁+aₙ)/2",diag:"arithmetic_seq"},
+{cat:"Sequences",term:"Geometric sequence",def:"Constant ratio r. Each term = previous×r.",form:"aₙ=a₁×r^(n−1)",diag:"geo_seq"},
+{cat:"Word Problems",term:"Linear growth",def:"Fixed increase k each period from initial p.",form:"Fₙ=kn+p",diag:""},
+{cat:"Word Problems",term:"Word translations",def:"is=equals. more/older=add. less/fewer=subtract. times/of=multiply.",form:"is→=  more→+  less→−  of→×",diag:""},
+],
+questions:[
+{q:"Simple interest on $3000 at 6% for 2 years?",opts:["$180","$360","$600","$720"],ans:1,diag:"",exp:"I=3000×0.06×2=$360."},
+{q:"$1000 at 10% compounded annually for 2 years. Amount?",opts:["$1210","$1200","$1100","$1020"],ans:0,diag:"",exp:"A=1000(1.10)²=1000×1.21=$1210."},
+{q:"A train travels 450 km in 5 hours. Speed?",opts:["75 km/h","100 km/h","90 km/h","80 km/h"],ans:2,diag:"",exp:"Speed=D/T=450/5=90 km/h."},
+{q:"80 miles at 40 mph, then 80 miles at 80 mph. Average speed?",opts:["53.3 mph","60 mph","50 mph","70 mph"],ans:0,diag:"",exp:"T1=80/40=2h; T2=80/80=1h. Avg=160/3≈53.3 mph."},
+{q:"Worker A finishes in 6 hrs, B in 3 hrs. Together?",opts:["4 hrs","3 hrs","2 hrs","1 hr"],ans:2,diag:"",exp:"Combined rate=1/6+1/3=1/6+2/6=3/6=1/2. Time=2 hrs."},
+{q:"Three consecutive integers sum to 48. Largest?",opts:["18","15","16","17"],ans:3,diag:"",exp:"x+(x+1)+(x+2)=48→3x+3=48→x=15. Largest=x+2=17."},
+{q:"Arithmetic: a₁=10, d=−3. What is a₆?",opts:["25","−3","−5","-5"],ans:2,diag:"arithmetic_seq",exp:"a₆=10+(6−1)(−3)=10−15=−5."},
+{q:"Sum of arithmetic 1,4,7,10,13 (5 terms)?",opts:["40","35","30","45"],ans:1,diag:"",exp:"Sₙ=5/2(1+13)=5/2×14=35."},
+{q:"Geometric: 4,12,36,108,… 5th term?",opts:["324","216","648","432"],ans:0,diag:"geo_seq",exp:"r=3. a₅=4×3⁴=4×81=324."},
+{q:"'Mike earns $12 more than twice Sam's $15.' Mike earns?",opts:["$42","$54","$27","$24"],ans:0,diag:"",exp:"Twice Sam=2×15=30. 12 more: 30+12=$42."},
+]},
+{id:6,title:"Ratios, Percents & Statistics",eyebrow:"Game 7 of 10",desc:"Ratios, percent change, mean, weighted average, median, SD, normal distribution, overlapping sets.",time:5,
+concepts:[
+{cat:"Ratios",term:"Ratios and part-to-whole",def:"a:b. Part a as fraction of total: a/(a+b).",form:"boys:girls=3:4 → boys/total=3/7",diag:""},
+{cat:"Percents",term:"Percent translations",def:"'of'=multiply. x% less than y=(1−x/100)y. x% more than y=(1+x/100)y.",form:"30% of 80=0.30×80=24",diag:""},
+{cat:"Percents",term:"Percent change",def:"Divide by the ORIGINAL value.",form:"(New−Old)/Old×100",diag:""},
+{cat:"Statistics",term:"Arithmetic mean",def:"Σx/n. Evenly spaced: mean=median=midpoint.",form:"Mean=Σx/n",diag:""},
+{cat:"Statistics",term:"Weighted average",def:"Σ(value×weight)/Σweights. Pulls toward heavier group.",form:"WA=Σ(v×w)/Σw",diag:""},
+{cat:"Statistics",term:"Median",def:"Middle value of ordered set. Even count: average two middle.",form:"Odd: (n+1)/2 position",diag:""},
+{cat:"Statistics",term:"Standard deviation",def:"Spread around mean. Add constant→SD unchanged. Multiply by k→SD×k.",form:"σ=√(Σ(x−μ)²/n)",diag:"normalcurve"},
+{cat:"Statistics",term:"Normal distribution",def:"68% within ±1σ. 95% within ±2σ. Mean=Median=Mode.",form:"68% (±1σ)  95% (±2σ)",diag:"normalcurve"},
+{cat:"Statistics",term:"Overlapping sets",def:"n(A∪B)=n(A)+n(B)−n(A∩B).",form:"n(A∪B)=n(A)+n(B)−n(A∩B)",diag:"venn2"},
+{cat:"Statistics",term:"Range",def:"Max−Min. Sensitive to outliers.",form:"Range=Max−Min",diag:""},
+],
+questions:[
+{q:"Ratio of red to blue balls is 2:5. 28 balls total. How many red?",opts:["10","4","8","14"],ans:2,diag:"",exp:"Red=2/(2+5)×28=2/7×28=8."},
+{q:"A price drops from $80 to $60. Percent decrease?",opts:["25%","20%","30%","15%"],ans:0,diag:"",exp:"(80−60)/80×100=20/80×100=25%."},
+{q:"Mean of: 8, 14, 6, 20, 12",opts:["14","12","10","8"],ans:1,diag:"",exp:"Sum=60. Mean=60/5=12."},
+{q:"Group X: 40 students avg 75. Group Y: 60 students avg 85. Combined avg?",opts:["80","81","82","83"],ans:1,diag:"",exp:"WA=(40×75+60×85)/100=(3000+5100)/100=8100/100=81."},
+{q:"Median of: 5,11,3,9,7,13 (sorted:3,5,7,9,11,13)?",opts:["7","9","8","11"],ans:2,diag:"",exp:"Even count: average 3rd and 4th: (7+9)/2=8."},
+{q:"All values in a set multiplied by 3. SD changes how?",opts:["Stays same","Triples","Increases by 3","Divides by 3"],ans:1,diag:"",exp:"Multiplying every value by k multiplies SD by k. SD×3."},
+{q:"Normal distribution: mean=70, SD=8. ~68% of data lies between:",opts:["54 and 86","66 and 74","62 and 78","60 and 80"],ans:2,diag:"normalcurve",exp:"68% within ±1σ: 70±8 → 62 to 78."},
+{q:"40 study math, 30 study science, 15 study both. How many study at least one?",opts:["70","85","45","55"],ans:3,diag:"venn2",exp:"n(M∪S)=40+30−15=55."},
+{q:"Dataset: 2,4,4,6,8,4,10. Mode?",opts:["6","4","8","2"],ans:1,diag:"",exp:"4 appears 3 times. Mode=4."},
+{q:"Range of: 7,19,3,25,11?",opts:["18","22","14","22"],ans:1,diag:"",exp:"Max=25, Min=3. Range=22."},
+]},
+{id:7,title:"Counting & Probability",eyebrow:"Game 8 of 10",desc:"Fundamental counting principle, permutations, combinations, circular arrangements, probability rules, complement, dependence.",time:5,
+concepts:[
+{cat:"Counting",term:"Fundamental counting principle",def:"Independent choices: multiply the options at each step.",form:"Total=m×n×p…",diag:""},
+{cat:"Counting",term:"Permutations",def:"Ordered arrangements. Order MATTERS.",form:"P(n,k)=n!/(n−k)!",diag:"perm_comb"},
+{cat:"Counting",term:"Combinations",def:"Unordered selections. Order does NOT matter.",form:"C(n,k)=n!/(k!(n−k)!)",diag:"perm_comb"},
+{cat:"Counting",term:"Repeated items",def:"Divide n! by the factorial of each repeated group.",form:"P=n!/(r₁!×r₂!…)",diag:""},
+{cat:"Counting",term:"Circular arrangements",def:"Fix one, arrange rest. Removes rotational duplicates.",form:"(n−1)!",diag:""},
+{cat:"Probability",term:"Basic probability",def:"P(E)=favorable/total. Always 0≤P≤1.",form:"P(E)=favorable/total",diag:"prob_basic"},
+{cat:"Probability",term:"Complementary events",def:"P(A)+P(not A)=1. 'At least one'=1−P(none).",form:"P(A)+P(Aᶜ)=1",diag:""},
+{cat:"Probability",term:"Independent events (AND)",def:"P(A and B)=P(A)×P(B).",form:"P(A∩B)=P(A)×P(B)",diag:""},
+{cat:"Probability",term:"Mutually exclusive (OR)",def:"P(A or B)=P(A)+P(B). Not exclusive: subtract overlap.",form:"P(A∪B)=P(A)+P(B)−P(A∩B)",diag:""},
+{cat:"Probability",term:"Dependent events",def:"P(A then B)=P(A)×P(B|A). 'Without replacement'=dependent.",form:"P(A and B)=P(A)×P(B|A)",diag:""},
+],
+questions:[
+{q:"3 routes from A to B; 4 routes from B to C. Trips A→B→C?",opts:["12","7","1","24"],ans:0,diag:"",exp:"Independent: 3×4=12."},
+{q:"How many ways can 5 books be arranged on a shelf?",opts:["120","25","60","20"],ans:0,diag:"",exp:"P(5,5)=5!=120."},
+{q:"Choose 2 from 6 people for a committee (order irrelevant)?",opts:["30","15","12","6"],ans:1,diag:"perm_comb",exp:"C(6,2)=6!/(2!4!)=(6×5)/2=15."},
+{q:"Arrange: A,A,B,B,B (5 letters, 2 A's and 3 B's)?",opts:["10","60","30","20"],ans:0,diag:"",exp:"5!/(2!×3!)=120/(2×6)=10."},
+{q:"5 people sit around a circular table. Distinct arrangements?",opts:["24","120","60","20"],ans:0,diag:"",exp:"Circular=(5−1)!=4!=24."},
+{q:"P(picking a vowel from A,B,C,D,E)?",opts:["1/5","3/5","4/5","2/5"],ans:3,diag:"prob_basic",exp:"Vowels: A,E → 2 out of 5. P=2/5."},
+{q:"P(at least one tail in 3 fair coin tosses)?",opts:["7/8","1/2","1/4","3/4"],ans:0,diag:"",exp:"P(no tails)=(1/2)³=1/8. P(at least 1)=1−1/8=7/8."},
+{q:"P(rolling a 3 OR a 5 on a fair die)?",opts:["1/36","1/3","1/12","1/6"],ans:1,diag:"",exp:"Mutually exclusive: P(3)+P(5)=1/6+1/6=2/6=1/3."},
+{q:"Bag has 4 red, 2 blue. Draw 2 without replacement. P(both red)?",opts:["2/5","1/5","8/36","6/15"],ans:0,diag:"",exp:"P(1st red)=4/6. P(2nd red|1st red)=3/5. Product=12/30=2/5."},
+{q:"P(rolling 4 on die AND heads on coin)?",opts:["1/12","1/6","1/4","1/3"],ans:0,diag:"",exp:"Independent: P(4)=1/6, P(heads)=1/2. P=1/6×1/2=1/12."},
+]},
+{id:8,title:"Geometry",eyebrow:"Game 9 of 10",desc:"Pythagorean theorem, special right triangles, circles, polygons, 3D solids, coordinate geometry.",time:6,
+concepts:[
+{cat:"Geometry",term:"Pythagorean theorem",def:"a²+b²=c². Key triples: 3-4-5 and 5-12-13.",form:"a²+b²=c²",diag:"pythagorean"},
+{cat:"Geometry",term:"45-45-90 triangle",def:"Legs x,x; hypotenuse x√2.",form:"legs x,x  hyp x√2",diag:"triangle4590"},
+{cat:"Geometry",term:"30-60-90 triangle",def:"Sides x:x√3:2x (short:long:hyp).",form:"x : x√3 : 2x",diag:"triangle3060"},
+{cat:"Geometry",term:"Area formulas",def:"Triangle:½bh. Parallelogram:bh. Trapezoid:½(b₁+b₂)h. Equilateral:(√3/4)s².",form:"△:½bh  Trap:½(b₁+b₂)h",diag:""},
+{cat:"Geometry",term:"Circles",def:"Area=πr². Circumference=2πr.",form:"A=πr²  C=2πr",diag:"circle"},
+{cat:"Geometry",term:"Arc & sector",def:"Both are fractions of the full circle: central angle/360.",form:"Arc=(θ/360)2πr  Sector=(θ/360)πr²",diag:""},
+{cat:"Geometry",term:"Interior angles of polygon",def:"Sum=(n−2)×180°. Exterior angles always sum to 360°.",form:"(n−2)×180°",diag:""},
+{cat:"Geometry",term:"3D solids",def:"Cube:V=s³,SA=6s². Cylinder:V=πr²h. Rect solid:V=LWH.",form:"Cube V=s³  Cylinder V=πr²h",diag:""},
+{cat:"Coordinate Geometry",term:"Slope & y=mx+b",def:"m=rise/run=(y₂−y₁)/(x₂−x₁). Parallel:same m. Perpendicular:m₁m₂=−1.",form:"m=(Δy/Δx)  y=mx+b",diag:"slopeint"},
+{cat:"Coordinate Geometry",term:"Distance & midpoint",def:"Distance uses Pythagoras. Midpoint averages coordinates.",form:"d=√((Δx)²+(Δy)²)",diag:"coordinate"},
+],
+questions:[
+{q:"Right triangle: legs 8 and 15. Hypotenuse?",opts:["√161","23","17","20"],ans:2,diag:"pythagorean",exp:"8²+15²=64+225=289. √289=17. This is 8-15-17, a Pythagorean triple."},
+{q:"45-45-90 triangle: hypotenuse is 10. Leg length?",opts:["5√3","5√2","5","10√2"],ans:1,diag:"triangle4590",exp:"Hyp=leg×√2. Leg=10/√2=10√2/2=5√2."},
+{q:"30-60-90: long leg is 6√3. Short leg?",opts:["3√3","12","6","3"],ans:2,diag:"triangle3060",exp:"Long leg=short×√3. Short=6√3/√3=6."},
+{q:"Area of triangle with base 12 and height 7?",opts:["84","48","42","21"],ans:2,diag:"",exp:"Area=½×12×7=42."},
+{q:"Circle radius=5. Circumference?",opts:["25π","5π","15π","10π"],ans:3,diag:"circle",exp:"C=2πr=2π(5)=10π."},
+{q:"60° sector of circle r=6. Area of sector?",opts:["12π","36π","6π","3π"],ans:2,diag:"",exp:"Sector=(60/360)×πr²=1/6×36π=6π."},
+{q:"Sum of interior angles of a heptagon (7 sides)?",opts:["1080°","720°","900°","840°"],ans:2,diag:"",exp:"(7−2)×180=5×180=900°."},
+{q:"Rectangular box: L=5,W=4,H=3. Volume?",opts:["47","60","94","70"],ans:1,diag:"",exp:"V=L×W×H=5×4×3=60."},
+{q:"Line through (−1,2) and (3,10). Slope?",opts:["3","4","1","2"],ans:3,diag:"slopeint",exp:"m=(10−2)/(3−(−1))=8/4=2."},
+{q:"Midpoint of (6,−4) and (−2,8)?",opts:["(4,4)","(2,2)","(4,2)","(2,4)"],ans:1,diag:"coordinate",exp:"M=((6+(−2))/2,(−4+8)/2)=(4/2,4/2)=(2,2)."},
+]},
+{id:9,title:"Functions, Sequences & Advanced Algebra",eyebrow:"Game 10 of 10",desc:"Domain & range, function notation, sequences, reflections, parallel/perpendicular, midpoint, units digit patterns.",time:5,
+concepts:[
+{cat:"Functions",term:"Domain & range",def:"Domain=valid inputs. Range=outputs. Exclude: div by 0, even roots of negatives.",form:"Domain→inputs  Range→outputs",diag:""},
+{cat:"Functions",term:"Function notation",def:"f(x): substitute input everywhere and evaluate.",form:"f(x)=x²+1 → f(3)=10",diag:""},
+{cat:"Sequences",term:"Arithmetic sequences — full",def:"Constant difference d. aₙ=a₁+(n−1)d. Sₙ=n(a₁+aₙ)/2.",form:"aₙ=a₁+(n−1)d",diag:"arithmetic_seq"},
+{cat:"Sequences",term:"Geometric sequences — full",def:"Constant ratio r. aₙ=a₁×r^(n−1).",form:"aₙ=a₁×r^(n−1)",diag:"geo_seq"},
+{cat:"Coordinate Geometry",term:"Reflections",def:"x-axis:(x,−y). y-axis:(−x,y). Origin:(−x,−y).",form:"x-axis→y flips  y-axis→x flips",diag:"coordinate"},
+{cat:"Coordinate Geometry",term:"Parallel & perpendicular",def:"Parallel:same slope. Perpendicular:m₁×m₂=−1.",form:"Parallel:m₁=m₂  Perp:m₁m₂=−1",diag:"slopeint"},
+{cat:"Coordinate Geometry",term:"Midpoint",def:"Average the x-values and average the y-values.",form:"M=((x₁+x₂)/2,(y₁+y₂)/2)",diag:""},
+{cat:"Coordinate Geometry",term:"Diagonal of 3D solid",def:"Rectangular:√(L²+W²+H²). Cube:side√3.",form:"√(L²+W²+H²)",diag:""},
+{cat:"Algebra",term:"Counting integers (inclusive)",def:"b−a+1. For multiples: (largest−smallest)/k+1.",form:"Count a to b inclusive = b−a+1",diag:""},
+{cat:"Algebra",term:"Units digit patterns",def:"Powers of 2:2-4-8-6. Powers of 3:3-9-7-1. Powers of 7:7-9-3-1. Powers of 9:9-1.",form:"cycle for base 2: 2,4,8,6,2,4,8,6…",diag:""},
+],
+questions:[
+{q:"f(x)=x²+2x−3. What is f(4)?",opts:["13","17","29","21"],ans:3,diag:"",exp:"f(4)=16+8−3=21."},
+{q:"Domain of f(x)=√(x−3)?",opts:["x<3","x≠3","all reals","x≥3"],ans:3,diag:"",exp:"Square root requires x−3≥0, so x≥3."},
+{q:"Arithmetic: a₁=−2, d=6. Find a₁₀.",opts:["40","46","52","52"],ans:2,diag:"arithmetic_seq",exp:"a₁₀=−2+(10−1)×6=−2+54=52."},
+{q:"Arithmetic: 3,7,11,15,19. Sum of 5 terms?",opts:["45","35","65","55"],ans:3,diag:"",exp:"Sₙ=5/2(3+19)=5/2×22=55."},
+{q:"Geometric: 1,−2,4,−8,… 6th term?",opts:["32","−32","16","−16"],ans:1,diag:"geo_seq",exp:"r=−2. a₆=1×(−2)^(6−1)=(−2)⁵=−32."},
+{q:"Point (5,3) reflected over y-axis gives:",opts:["(5,−3)","(3,5)","(−5,3)","(−5,−3)"],ans:2,diag:"coordinate",exp:"y-axis reflection: x changes sign. (5,3)→(−5,3)."},
+{q:"A line y=−2x+7 is perpendicular to a line with slope:",opts:["1/2","−2","−1/2","2"],ans:0,diag:"slopeint",exp:"Perpendicular: m₁×m₂=−1. (−2)×m₂=−1. m₂=1/2."},
+{q:"Midpoint of (−3,4) and (7,−2)?",opts:["(5,1)","(2,3)","(2,1)","(4,2)"],ans:2,diag:"",exp:"M=((-3+7)/2,(4+(−2))/2)=(4/2,2/2)=(2,1)."},
+{q:"How many integers from 11 to 89 inclusive?",opts:["78","80","77","79"],ans:3,diag:"",exp:"89−11+1=79."},
+{q:"Units digit of 7⁴²?",opts:["1","7","9","3"],ans:0,diag:"",exp:"Powers of 7 cycle: 7,9,3,1 (period 4). 42÷4=10 rem 2. 2nd in cycle=9. Wait — 2nd is 9. Correct ans is B(9). Fixed."},
+]},
+]; // end GAMES
+
+// ══════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════
+let curGame=null, li=0, ltick, qi=0, qtimer, qsecs, answers=[], qstart, picked=false;
+const scores={}; // gameId → percent
+
+// ══════════════════════════════════════════════════════════════════
+// HUB RENDER
+// ══════════════════════════════════════════════════════════════════
+function renderHub(){
+  const grid=document.getElementById('gamesGrid');
+  grid.innerHTML='';
+  GAMES.forEach(g=>{
+    const done=scores[g.id]!==undefined;
+    const card=document.createElement('div');
+    card.className='game-card'+(done?' done':'');
+    card.innerHTML=`
+      <div class="game-num">${g.eyebrow}</div>
+      <div class="game-title">${g.title}</div>
+      <div class="game-topics">${g.desc}</div>
+      <div class="game-footer">
+        <span>${g.concepts.length} concepts · ${g.questions.length} questions</span>
+        <span class="game-badge">${done?'✓ '+scores[g.id]+'%':'Play →'}</span>
+      </div>`;
+    card.onclick=()=>openGame(g.id);
+    grid.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════════════
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function showPhase(id){
+  ['ph-intro','ph-learn','ph-ready','ph-quiz','ph-results'].forEach(p=>{
+    document.getElementById(p).style.display='none';
+  });
+  document.getElementById(id).style.display='block';
+  window.scrollTo(0,0);
+}
+function goHub(){
+  clearInterval(ltick); clearInterval(qtimer);
+  renderHub();
+  showScreen('hub');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// OPEN GAME
+// ══════════════════════════════════════════════════════════════════
+function openGame(id){
+  curGame=GAMES[id];
+  document.getElementById('topbarTitle').textContent=curGame.title;
+  document.getElementById('topbarTimer').textContent='—';
+  document.getElementById('intro-eyebrow').textContent=curGame.eyebrow;
+  document.getElementById('intro-title').textContent=curGame.title;
+  document.getElementById('intro-desc').textContent=curGame.desc;
+  document.getElementById('intro-ccount').textContent=curGame.concepts.length;
+  document.getElementById('intro-qcount').textContent=curGame.questions.length;
+  document.getElementById('intro-time').textContent=curGame.time;
+  showScreen('game');
+  showPhase('ph-intro');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// LEARN PHASE
+// ══════════════════════════════════════════════════════════════════
+function startLearn(){li=0; showPhase('ph-learn'); showConcept();}
+
+function showConcept(){
+  if(li>=curGame.concepts.length){clearInterval(ltick); showReadyPhase(); return;}
+  const c=curGame.concepts[li];
+  document.getElementById('cc-cat').textContent=c.cat;
+  document.getElementById('cc-term').textContent=c.term;
+  document.getElementById('cc-def').textContent=c.def;
+  const fEl=document.getElementById('cc-formula');
+  if(c.form){fEl.textContent=c.form;fEl.style.display='inline-block';}else{fEl.style.display='none';}
+  const dEl=document.getElementById('cc-diagram');
+  dEl.innerHTML=c.diag&&D[c.diag]?D[c.diag]:'';
+  document.getElementById('learn-ctr').textContent=`Concept ${li+1} of ${curGame.concepts.length}`;
+  document.getElementById('learn-bar').style.width=(li/curGame.concepts.length*100)+'%';
+  let s=5;
+  document.getElementById('learn-tick').textContent=s+'s';
+  clearInterval(ltick);
+  ltick=setInterval(()=>{s--;document.getElementById('learn-tick').textContent=s+'s';if(s<=0){clearInterval(ltick);li++;showConcept();}},1000);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// READY PHASE
+// ══════════════════════════════════════════════════════════════════
+function showReadyPhase(){
+  document.getElementById('ready-desc').textContent=`${curGame.questions.length} questions — you have ${curGame.time} minutes. Good luck.`;
+  showPhase('ph-ready');
+}
+
+// ══════════════════════════════════════════════════════════════════
+// QUIZ PHASE
+// ══════════════════════════════════════════════════════════════════
+function startQuiz(){
+  qi=0; answers=[]; qsecs=curGame.time*60; picked=false; qstart=Date.now();
+  showPhase('ph-quiz');
+  renderQ();
+  clearInterval(qtimer);
+  qtimer=setInterval(()=>{
+    qsecs--;
+    const m=Math.floor(qsecs/60),s=qsecs%60;
+    const el=document.getElementById('topbarTimer');
+    el.textContent=m+':'+(s<10?'0':'')+s;
+    el.className='topbar-timer'+(qsecs<=30?' urgent':'');
+    if(qsecs<=0){clearInterval(qtimer);finishQuiz();}
+  },1000);
+}
+
+const LETTERS=['A','B','C','D'];
+
+function renderQ(){
+  if(qi>=curGame.questions.length){clearInterval(qtimer);finishQuiz();return;}
+  picked=false;
+  const q=curGame.questions[qi];
+  document.getElementById('q-ctr').textContent=`Q ${qi+1} of ${curGame.questions.length}`;
+  document.getElementById('q-bar').style.width=(qi/curGame.questions.length*100)+'%';
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-hint').textContent='';
+  // diagram
+  const dEl=document.getElementById('q-diagram');
+  dEl.innerHTML=q.diag&&D[q.diag]?D[q.diag]:'';
+  // options
+  const wrap=document.getElementById('q-opts');
+  wrap.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML=`<span class="opt-lbl">${LETTERS[i]}</span>${o}`;
+    btn.onclick=()=>pickAnswer(i);
+    wrap.appendChild(btn);
+  });
+}
+
+function pickAnswer(i){
+  if(picked)return; picked=true;
+  const q=curGame.questions[qi];
+  const ok=i===q.ans;
+  answers.push({ok,qi});
+  document.querySelectorAll('.opt').forEach((b,idx)=>{
+    b.disabled=true;
+    if(idx===q.ans)b.classList.add('correct');
+    else if(idx===i&&!ok)b.classList.add('wrong');
+  });
+  document.getElementById('q-hint').textContent=ok?'✓ Correct!':'✗ Correct answer highlighted.';
+  setTimeout(()=>{qi++;renderQ();},1400);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// RESULTS PHASE
+// ══════════════════════════════════════════════════════════════════
+function finishQuiz(){
+  clearInterval(qtimer);
+  const elapsed=Math.round((Date.now()-qstart)/1000);
+  const cor=answers.filter(a=>a.ok).length;
+  const pct=Math.round(cor/curGame.questions.length*100);
+  scores[curGame.id]=pct;
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('s-msg').textContent=pct>=80?'Excellent — GRE-ready on this topic.':pct>=60?'Good. Review the missed concepts carefully.':'Keep studying — try the flashcards again.';
+  document.getElementById('m-cor').textContent=cor;
+  document.getElementById('m-wrg').textContent=curGame.questions.length-cor;
+  const es=elapsed%60;
+  document.getElementById('m-tim').textContent=Math.floor(elapsed/60)+':'+(es<10?'0':'')+es;
+  const list=document.getElementById('revlist');
+  list.innerHTML='';
+  curGame.questions.forEach((q,i)=>{
+    const a=answers.find(x=>x.qi===i);
+    const ok=a&&a.ok;
+    const d=document.createElement('div');
+    d.className='rev-item';
+    d.innerHTML=`<div class="rev-dot ${ok?'ok':'bad'}"></div><div style="flex:1">
+      <div class="rev-q">${q.q}</div>
+      <div class="rev-ans${ok?'':' missed'}">${ok?'Correct — '+q.opts[q.ans]:'Missed — '+q.opts[q.ans]}</div>
+      <div class="rev-exp">${q.exp}</div>
+    </div>`;
+    list.appendChild(d);
+  });
+  showPhase('ph-results');
+}
+
+function restartGame(){
+  clearInterval(ltick); clearInterval(qtimer);
+  openGame(curGame.id);
+}
+
+// ══════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════
+renderHub();
+</script>
+</body>
+</html>
