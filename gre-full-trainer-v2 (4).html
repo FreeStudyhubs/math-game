@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#e0f4fb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>GRE Math Mastery — 10 Games | Free Study Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #e0f4fb;
+  --bg2:       #c8eaf6;
+  --surface:   #ffffff;
+  --surface2:  #eaf7fd;
+  --surface3:  #d0ecf8;
+  --border:    rgba(0,110,160,0.12);
+  --border2:   rgba(0,110,160,0.22);
+  --ink:       #072030;       /* strongest text — headings, questions */
+  --ink2:      #1a4f6e;       /* body text, descriptions */
+  --ink3:      #5a96b8;       /* labels, hints, meta */
+  --accent:    #005f99;       /* primary blue */
+  --accent2:   #00a8cc;       /* lighter blue for gradients */
+  --accent-dim:rgba(0,95,153,0.10);
+  --red:       #c0392b;
+  --red-dim:   rgba(192,57,43,0.10);
+  --green:     #1e7d4a;
+  --green-dim: rgba(30,125,74,0.12);
+  --r:         12px;
+  --r-sm:      8px;
+  --r-lg:      16px;
+
+  /* Typography scale */
+  --fs-xs:   11px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   20px;
+  --fs-xl:   24px;
+  --fs-2xl:  30px;
+  --fs-3xl:  38px;
+
+  --lh-tight: 1.25;
+  --lh-base:  1.6;
+  --lh-loose: 1.8;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:var(--fs-base);
+  line-height:var(--lh-base);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
+
+/* ══════════ HUB ══════════ */
+#hub{background:var(--bg);}
+
+/* Hero — full-bleed with deep navy bar at top */
+.hub-hero{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* Top navy section */
+.hub-hero-top{
+  background:linear-gradient(145deg,#072030 0%,#0a3558 60%,#005f99 100%);
+  padding:3.5rem 1.5rem 5rem;
+  position:relative;
+  overflow:hidden;
+}
+/* Decorative circles */
+.hub-hero-top::before{
+  content:'';position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,168,204,.18) 0%,transparent 70%);
+  top:-200px;right:-150px;pointer-events:none;
+}
+.hub-hero-top::after{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,95,153,.20) 0%,transparent 70%);
+  bottom:-100px;left:-100px;pointer-events:none;
+}
+
+.hub-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--fs-xs);letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:99px;padding:6px 20px;margin-bottom:1.5rem;
+  position:relative;z-index:1;
+}
+.hub-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#38ccf0;display:inline-block;animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.hub-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.6rem,6vw,4.4rem);
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:1.1rem;
+  letter-spacing:-.02em;
+  position:relative;z-index:1;
+}
+.hub-title em{
+  font-style:italic;
+  color:#38ccf0;
+}
+.hub-sub{
+  font-size:var(--fs-md);
+  color:rgba(255,255,255,.65);
+  max-width:520px;margin:0 auto 0;
+  line-height:1.75;font-weight:400;
+  position:relative;z-index:1;
+}
+
+/* Stats card — overlapping the two sections */
+.hub-stats-wrap{
+  position:relative;
+  z-index:10;
+  margin-top:-36px;
+  padding:0 1.5rem;
+  display:flex;justify-content:center;
+}
+.hub-stats{
+  display:inline-grid;
+  grid-template-columns:repeat(3,1fr);
+  background:var(--surface);
+  border:1.5px solid var(--border2);
+  border-radius:var(--r);
+  overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,40,80,.16);
+  min-width:360px;
+}
+.hub-stat{
+  padding:1.1rem 1.4rem;
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  color:var(--ink3);border-right:1.5px solid var(--border2);
+  letter-spacing:.04em;text-align:center;
+}
+.hub-stat:last-child{border-right:none;}
+.hub-stat strong{
+  display:block;font-size:1.6rem;
+  color:var(--accent);margin-bottom:2px;
+  letter-spacing:-.01em;font-weight:700;
+}
+.hub-stat span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;}
+
+/* Source badges row */
+.hub-sources{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  padding:1.5rem 1.5rem 0;
+}
+.hub-source-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 14px;border-radius:99px;
+  border:1px solid var(--border2);color:var(--ink3);
+}
+.hub-source-badge.ets{
+  background:var(--accent-dim);color:var(--accent);
+  border-color:rgba(0,95,153,.25);
+}
+.hub-source-badge.magoosh{
+  background:rgba(184,134,11,.1);color:#7a5c00;
+  border-color:rgba(184,134,11,.28);
+}
+
+/* Games grid */
+.hub-section{max-width:1040px;margin:0 auto;padding:2.25rem 1.5rem 5rem;}
+.section-label{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:.85rem;font-weight:500;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border2);}
+
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1.25rem;
+}
+.game-card{
+  background:var(--surface);
+  border:1.5px solid var(--border2);
+  border-radius:var(--r);cursor:pointer;
+  transition:transform .2s,box-shadow .22s,border-color .2s;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,80,140,.07);
+  position:relative;
+}
+.game-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 50px rgba(0,50,120,.16);
+  border-color:var(--accent);
+}
+.game-card-num-badge{
+  position:absolute;top:14px;right:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  font-weight:700;color:var(--ink3);
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:6px;padding:3px 8px;letter-spacing:.04em;
+  transition:all .2s;
+}
+.game-card:hover .game-card-num-badge{
+  background:var(--accent-dim);color:var(--accent);border-color:rgba(0,95,153,.25);
+}
+.game-card-accent{
+  height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:0;transition:opacity .2s;
+}
+.game-card:hover .game-card-accent,.game-card.done .game-card-accent{opacity:1;}
+.game-card.done{border-color:rgba(30,125,74,.35);}
+.game-card.done .game-card-accent{background:linear-gradient(90deg,var(--green),var(--accent2));}
+.game-card-body{padding:1.5rem 1.5rem 1.1rem;flex:1;}
+.game-num{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:.1em;color:var(--ink3);margin-bottom:.55rem;font-weight:500;
+}
+.game-title{
+  font-family:'Playfair Display',serif;font-size:var(--fs-lg);
+  color:var(--ink);margin-bottom:.45rem;line-height:1.25;font-weight:700;
+}
+.game-topics{font-size:var(--fs-sm);color:var(--ink2);line-height:1.68;}
+.game-card-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.9rem 1.5rem;border-top:1px solid var(--border);
+  background:var(--surface2);
+}
+.game-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink3);}
+.game-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;
+  background:var(--accent-dim);color:var(--accent);
+  border:1px solid rgba(0,95,153,.22);border-radius:99px;
+  padding:4px 14px;transition:all .15s;
+}
+.game-card:hover .game-badge{background:var(--accent);color:#fff;}
+.game-card.done .game-badge{background:var(--green-dim);color:var(--green);border-color:rgba(30,125,74,.3);}
+
+/* Site footer */
+.site-footer{
+  background:var(--surface);border-top:1.5px solid var(--border2);
+  text-align:center;padding:2.75rem 1rem;
+}
+.sf-by{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:.4rem;
+}
+.sf-name{font-family:'Playfair Display',serif;font-size:var(--fs-xl);color:var(--accent);margin-bottom:.2rem;}
+.sf-brand{font-size:var(--fs-sm);color:var(--ink2);margin-bottom:1rem;font-weight:500;}
+.sf-links{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.sf-link{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-sm);
+  color:var(--ink2);text-decoration:none;transition:color .15s;
+}
+.sf-link:hover{color:var(--accent);}
+
+/* ══════════ SETTINGS ══════════ */
+#settings{background:var(--bg);}
+.settings-header{
+  background:var(--surface);border-bottom:1.5px solid var(--border2);
+  padding:1.1rem 1.5rem;display:flex;align-items:center;gap:1.1rem;
+}
+.settings-body{max-width:620px;margin:0 auto;padding:2.25rem 1.5rem 5rem;}
+.settings-title{
+  font-family:'Playfair Display',serif;font-size:var(--fs-xl);
+  color:var(--ink);margin-bottom:.25rem;line-height:var(--lh-tight);
+}
+.settings-subtitle{font-size:var(--fs-sm);color:var(--ink3);font-weight:400;}
+
+.sett-section{margin-bottom:2.25rem;}
+.sett-label{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);
+  margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;font-weight:600;
+}
+.sett-label::after{content:'';flex:1;height:1px;background:var(--border2);}
+
+/* Mode cards */
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.mode-card{
+  background:var(--surface);border:2px solid var(--border2);
+  border-radius:var(--r);padding:1.4rem 1.2rem;text-align:center;
+  cursor:pointer;transition:all .15s;
+}
+.mode-card:hover{border-color:var(--accent2);background:var(--surface2);}
+.mode-card.selected{
+  border-color:var(--accent);background:var(--accent-dim);
+  box-shadow:0 0 0 3px rgba(0,95,153,.12);
+}
+.mode-icon{font-size:2.2rem;display:block;margin-bottom:.6rem;}
+.mode-name{
+  font-size:var(--fs-md);font-weight:700;color:var(--ink);
+  margin-bottom:.4rem;
+}
+.mode-desc{font-size:var(--fs-sm);color:var(--ink2);line-height:1.65;}
+
+/* Concept time slider */
+.time-slider-wrap{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r);padding:1.5rem 1.5rem 1.25rem;
+  margin-bottom:1rem;
+}
+.time-slider-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.25rem;
+}
+.time-slider-label{
+  font-size:var(--fs-sm);color:var(--ink2);font-weight:500;
+}
+.time-slider-value{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--fs-xl);font-weight:700;color:var(--accent);
+  background:var(--accent-dim);border:1.5px solid rgba(0,95,153,.22);
+  border-radius:var(--r-sm);padding:4px 16px;min-width:100px;
+  text-align:center;
+}
+.time-slider{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:8px;border-radius:99px;outline:none;cursor:pointer;
+  background:linear-gradient(90deg,var(--accent) var(--pct,30%),var(--surface3) var(--pct,30%));
+  border:none;margin-bottom:1rem;
+}
+.time-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;
+  box-shadow:0 2px 8px rgba(0,95,153,.35);cursor:pointer;
+  transition:transform .1s,box-shadow .1s;
+}
+.time-slider::-webkit-slider-thumb:hover{
+  transform:scale(1.15);box-shadow:0 3px 14px rgba(0,95,153,.45);
+}
+.time-slider::-moz-range-thumb{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--accent);border:3px solid #fff;
+  box-shadow:0 2px 8px rgba(0,95,153,.35);cursor:pointer;
+}
+.time-slider-ticks{
+  display:flex;justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:var(--ink3);letter-spacing:.02em;
+}
+
+/* Chip row */
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:99px;padding:8px 18px;
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-sm);
+  color:var(--ink2);cursor:pointer;transition:all .15s;font-weight:500;
+}
+.chip:hover{border-color:var(--accent2);color:var(--ink);background:var(--surface2);}
+.chip.selected{
+  border-color:var(--accent);background:var(--accent);
+  color:#fff;font-weight:600;
+  box-shadow:0 2px 8px rgba(0,95,153,.25);
+}
+
+/* Settings summary */
+.sett-summary{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);padding:1.1rem 1.25rem;
+  display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;
+  box-shadow:0 1px 6px rgba(0,80,140,.05);
+}
+.sett-sum-item{font-size:var(--fs-sm);color:var(--ink2);line-height:1.5;}
+.sett-sum-item strong{color:var(--accent);font-weight:700;}
+
+/* ══════════ GAME TOPBAR ══════════ */
+#game{background:var(--bg);}
+.game-topbar{
+  background:rgba(224,244,251,0.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1.5px solid var(--border2);
+  padding:.85rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;
+  position:sticky;top:0;z-index:50;
+}
+.back-btn{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);padding:7px 15px;
+  font-family:'Inter',sans-serif;font-size:var(--fs-sm);font-weight:600;
+  color:var(--ink2);cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.back-btn:hover{background:var(--surface2);border-color:var(--accent);color:var(--accent);}
+.topbar-title{
+  font-family:'Playfair Display',serif;font-size:var(--fs-md);
+  color:var(--ink);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-weight:700;
+}
+.topbar-mode-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);font-weight:600;
+  border-radius:99px;padding:4px 12px;white-space:nowrap;letter-spacing:.04em;
+}
+.topbar-mode-badge.study{
+  background:var(--green-dim);color:var(--green);
+  border:1.5px solid rgba(30,125,74,.28);
+}
+.topbar-mode-badge.test{
+  background:var(--accent-dim);color:var(--accent);
+  border:1.5px solid rgba(0,95,153,.25);
+}
+.topbar-timer{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-md);font-weight:700;
+  color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--border2);border-radius:var(--r-sm);
+  padding:5px 14px;white-space:nowrap;
+}
+.topbar-timer.urgent{
+  color:var(--red);border-color:rgba(192,57,43,.4);
+  background:var(--red-dim);
+  animation:urgentPulse 1s ease-in-out infinite;
+}
+@keyframes urgentPulse{0%,100%{opacity:1;}50%{opacity:.65;}}
+
+/* ══════════ GAME BODY ══════════ */
+.game-body{max-width:660px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+
+/* Progress row */
+.prog-row{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:var(--fs-xs);color:var(--ink3);
+  font-family:'IBM Plex Mono',monospace;
+  margin-bottom:.5rem;letter-spacing:.04em;font-weight:500;
+}
+.prog-bar{
+  background:var(--surface3);border-radius:99px;
+  height:6px;margin-bottom:1.75rem;overflow:hidden;
+}
+.prog-fill{
+  height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width .5s ease;
+}
+.tick-badge{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-sm);font-weight:700;
+  color:var(--accent);background:var(--accent-dim);
+  border:1.5px solid rgba(0,95,153,.22);border-radius:var(--r-sm);padding:3px 12px;
+}
+
+/* ══════════ CONCEPT CARD ══════════ */
+.concept-card{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-lg);padding:2.5rem 2rem;
+  text-align:center;margin-bottom:1rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 16px rgba(0,80,140,.08);
+}
+.concept-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.cc-cat{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:var(--fs-xs);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.8rem;font-weight:600;
+}
+.cc-term{
+  font-family:'Playfair Display',serif;
+  font-size:var(--fs-2xl);color:var(--ink);
+  margin-bottom:.85rem;line-height:var(--lh-tight);
+}
+.cc-def{
+  font-size:var(--fs-md);color:var(--ink2);
+  line-height:var(--lh-loose);max-width:480px;margin:0 auto 1rem;
+}
+.cc-formula{
+  display:inline-block;
+  background:var(--surface2);border:1.5px solid rgba(0,95,153,.25);
+  border-radius:var(--r-sm);padding:8px 20px;
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-base);
+  color:var(--accent);font-weight:600;margin-top:.35rem;
+}
+.cc-diagram{margin:1rem auto 0;max-width:320px;}
+.learn-hint{
+  font-size:var(--fs-sm);color:var(--ink3);
+  text-align:center;font-family:'IBM Plex Mono',monospace;
+  margin-top:.5rem;letter-spacing:.02em;
+}
+
+/* Study mode nav buttons */
+.study-nav{display:flex;gap:10px;margin-top:.85rem;}
+.btn-prev,.btn-next-concept{
+  flex:1;padding:12px;border-radius:var(--r-sm);
+  font-family:'Inter',sans-serif;font-size:var(--fs-base);font-weight:700;
+  cursor:pointer;transition:all .15s;border:1.5px solid var(--border2);
+}
+.btn-prev{background:var(--surface);color:var(--ink2);}
+.btn-prev:hover{background:var(--surface2);border-color:var(--accent2);}
+.btn-next-concept{background:var(--accent);color:#fff;border-color:var(--accent);}
+.btn-next-concept:hover{background:#004d7a;}
+
+/* ══════════ INTRO CARD ══════════ */
+.intro-card{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-lg);padding:2.25rem 2rem;
+  text-align:center;margin-bottom:1.1rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 16px rgba(0,80,140,.08);
+}
+.intro-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.intro-card h2{
+  font-family:'Playfair Display',serif;font-size:var(--fs-xl);
+  color:var(--ink);margin-bottom:.55rem;line-height:var(--lh-tight);
+}
+.intro-card p{
+  font-size:var(--fs-base);color:var(--ink2);
+  line-height:var(--lh-loose);max-width:440px;margin:0 auto;
+}
+.intro-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.5rem 0;}
+.istep{
+  background:var(--surface2);border:1.5px solid var(--border);
+  border-radius:var(--r-sm);padding:1rem;text-align:center;
+}
+.istep-num{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xl);
+  color:var(--accent);display:block;margin-bottom:4px;font-weight:700;
+}
+.istep p{font-size:var(--fs-sm);color:var(--ink2);line-height:1.45;font-weight:500;}
+.intro-settings-summary{
+  background:var(--surface2);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);padding:.9rem 1.25rem;
+  font-size:var(--fs-sm);color:var(--ink2);
+  display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap;
+  margin-bottom:1.1rem;line-height:1.5;
+}
+.intro-settings-summary strong{color:var(--accent);font-weight:700;}
+
+/* ══════════ READY CARD ══════════ */
+.ready-card{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-lg);padding:2.75rem 2rem;
+  text-align:center;margin-bottom:1.1rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 16px rgba(0,80,140,.08);
+}
+.ready-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.ready-card h2{
+  font-family:'Playfair Display',serif;font-size:var(--fs-2xl);
+  color:var(--ink);margin-bottom:.6rem;
+}
+.ready-card p{
+  font-size:var(--fs-md);color:var(--ink2);line-height:var(--lh-loose);
+}
+
+/* ══════════ QUIZ ══════════ */
+.q-card{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-lg);padding:1.85rem 1.75rem;margin-bottom:1rem;
+  box-shadow:0 3px 14px rgba(0,80,140,.07);
+}
+.q-diagram{margin:0 0 1.25rem;text-align:center;}
+.q-text{
+  font-size:var(--fs-lg);color:var(--ink);
+  line-height:1.55;margin-bottom:1.25rem;font-weight:700;
+}
+.opts{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  background:var(--surface2);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);padding:13px 16px;text-align:left;
+  font-family:'Inter',sans-serif;font-size:var(--fs-base);
+  color:var(--ink2);cursor:pointer;transition:all .15s;
+  display:flex;align-items:center;gap:12px;font-weight:500;
+}
+.opt:hover:not(:disabled){
+  background:#cde8f5;border-color:var(--accent);color:var(--ink);
+}
+.opt-lbl{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  border:2px solid var(--border2);background:var(--surface);
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);font-weight:700;
+  color:var(--ink3);display:flex;align-items:center;justify-content:center;
+  transition:all .15s;
+}
+.opt:hover:not(:disabled) .opt-lbl{border-color:var(--accent);color:var(--accent);}
+.opt.correct{background:var(--green-dim);border-color:rgba(30,125,74,.45);color:var(--green);}
+.opt.correct .opt-lbl{background:var(--green);color:#fff;border-color:var(--green);}
+.opt.wrong{background:var(--red-dim);border-color:rgba(192,57,43,.45);color:var(--red);}
+.opt.wrong .opt-lbl{background:var(--red);color:#fff;border-color:var(--red);}
+.opt:disabled{cursor:default;}
+
+/* Inline explanation (study mode) */
+.study-exp-box{
+  background:var(--surface2);border-left:4px solid var(--accent);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:12px 16px;margin-top:14px;
+  font-size:var(--fs-base);color:var(--ink2);line-height:var(--lh-loose);
+  display:none;
+}
+.q-hint{
+  font-size:var(--fs-sm);color:var(--ink3);text-align:center;
+  min-height:20px;font-family:'IBM Plex Mono',monospace;
+  font-weight:500;letter-spacing:.02em;margin-top:.25rem;
+}
+
+/* ══════════ RESULTS ══════════ */
+.score-wrap{
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r-lg);padding:2.5rem 2rem;
+  text-align:center;margin-bottom:1.25rem;
+  position:relative;overflow:hidden;
+  box-shadow:0 3px 16px rgba(0,80,140,.08);
+}
+.score-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.score-label{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  margin-bottom:.4rem;font-weight:600;
+}
+.score-num{
+  font-family:'Playfair Display',serif;font-size:5.5rem;
+  color:var(--accent);line-height:1;
+}
+.score-msg{font-size:var(--fs-md);color:var(--ink2);margin-top:.6rem;font-weight:500;}
+
+.met-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem;}
+.met{
+  background:var(--surface2);border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);padding:1.1rem;text-align:center;
+}
+.met-val{
+  font-family:'IBM Plex Mono',monospace;font-size:1.6rem;
+  font-weight:700;display:block;margin-bottom:4px;
+}
+.met-lbl{
+  font-size:var(--fs-xs);color:var(--ink3);
+  text-transform:uppercase;letter-spacing:.1em;font-weight:600;
+}
+
+/* Review list */
+.rev-title{
+  font-family:'IBM Plex Mono',monospace;font-size:var(--fs-xs);
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);
+  margin-bottom:.85rem;font-weight:600;
+}
+.rev-item{
+  display:flex;align-items:flex-start;gap:13px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.rev-dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+.rev-dot.ok{background:var(--green);}
+.rev-dot.bad{background:var(--red);}
+.rev-q{font-size:var(--fs-base);color:var(--ink);line-height:1.5;font-weight:700;}
+.rev-ans{font-size:var(--fs-sm);color:var(--ink3);margin-top:3px;font-weight:500;}
+.rev-ans.missed{color:var(--red);font-weight:600;}
+.rev-exp{
+  font-size:var(--fs-sm);color:var(--ink2);margin-top:8px;
+  line-height:var(--lh-loose);
+  background:var(--surface2);border-left:3px solid var(--accent);
+  padding:8px 12px;border-radius:0 var(--r-sm) var(--r-sm) 0;
+}
+#revlist{margin-bottom:1.75rem;}
+
+/* ══════════ BUTTONS ══════════ */
+.btn-primary{
+  width:100%;padding:14px;
+  background:var(--accent);color:#fff;border:none;
+  border-radius:var(--r-sm);
+  font-family:'Inter',sans-serif;font-size:var(--fs-base);font-weight:700;
+  cursor:pointer;transition:all .2s;letter-spacing:.02em;
+}
+.btn-primary:hover{
+  background:#004d7a;transform:translateY(-1px);
+  box-shadow:0 6px 22px rgba(0,95,153,.28);
+}
+.btn-secondary{
+  width:100%;padding:13px;
+  background:var(--surface);color:var(--ink2);
+  border:1.5px solid var(--border2);border-radius:var(--r-sm);
+  font-family:'Inter',sans-serif;font-size:var(--fs-base);font-weight:600;
+  cursor:pointer;transition:all .15s;margin-top:.75rem;
+}
+.btn-secondary:hover{background:var(--surface2);color:var(--ink);border-color:var(--accent2);}
+
+/* ══════════ MOBILE & RESPONSIVE ══════════ */
+
+/* Prevent horizontal overflow globally */
+html, body { overflow-x: hidden; }
+* { max-width: 100%; }
+
+/* Formula box — wrap long text */
+.cc-formula {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+  max-width: 100%;
+  line-height: 1.6;
+}
+
+/* SVGs scale down gracefully */
+.cc-diagram svg, .q-diagram svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Concept card — better mobile padding */
+@media (max-width: 480px) {
+  .concept-card { padding: 1.75rem 1.1rem; }
+  .cc-term { font-size: 1.5rem; }
+  .cc-def { font-size: 0.9rem; }
+
+  /* Hub hero */
+  .hub-hero-top { padding: 2.5rem 1rem 4rem; }
+  .hub-title { font-size: 2rem; }
+  .hub-sub { font-size: 0.9rem; }
+  .hub-stats { grid-template-columns: repeat(3,1fr); min-width: unset; width: 100%; }
+  .hub-stats-wrap { padding: 0 1rem; }
+  .hub-stat strong { font-size: 1.3rem; }
+
+  /* Games grid — single column */
+  .games-grid { grid-template-columns: 1fr; }
+
+  /* Settings — mode grid stacks */
+  .mode-grid { grid-template-columns: 1fr; }
+  .mode-card { padding: 1.1rem 1rem; }
+  .mode-icon { font-size: 1.8rem; }
+
+  /* Chip row wraps nicely */
+  .chip-row { gap: 6px; }
+  .chip { padding: 7px 14px; font-size: 12px; }
+
+  /* Quiz */
+  .q-card { padding: 1.25rem 1rem; }
+  .q-text { font-size: 1rem; }
+  .opt { padding: 11px 12px; font-size: 0.875rem; }
+  .opt-lbl { width: 24px; height: 24px; font-size: 10px; }
+
+  /* Results */
+  .score-num { font-size: 4rem; }
+  .met-row { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+  .met { padding: 0.75rem 0.5rem; }
+  .met-val { font-size: 1.2rem; }
+
+  /* Topbar */
+  .topbar-title { font-size: 0.85rem; }
+  .game-body { padding: 1.25rem 1rem 4rem; }
+  .settings-body { padding: 1.5rem 1rem 4rem; }
+
+  /* Study nav buttons */
+  .study-nav { gap: 8px; }
+  .btn-prev, .btn-next-concept { padding: 10px; font-size: 0.875rem; }
+
+  /* Intro steps */
+  .intro-steps { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .istep-num { font-size: 1.1rem; }
+  .istep p { font-size: 10px; }
+
+  /* Time slider */
+  .time-slider-wrap { padding: 1.1rem 1rem 1rem; }
+  .time-slider-value { font-size: 1rem; min-width: 80px; }
+  .time-slider::-webkit-slider-thumb { width: 22px; height: 22px; }
+  .time-slider-ticks { font-size: 9px; }
+}
+
+@media (max-width: 360px) {
+  .hub-title { font-size: 1.75rem; }
+  .cc-term { font-size: 1.35rem; }
+  .q-text { font-size: 0.95rem; }
+  .intro-settings-summary { flex-direction: column; align-items: center; gap: 4px; }
+}
+
+/* Tap target minimum 44px for all interactive elements */
+.chip, .back-btn, .game-badge, .opt, .btn-primary, .btn-secondary,
+.btn-prev, .btn-next-concept, .mode-card {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.opt { justify-content: flex-start; }
+.mode-card { flex-direction: column; }
+.chip { display: inline-flex; }
+
+/* Slider thumb larger on touch */
+@media (hover: none) {
+  .time-slider::-webkit-slider-thumb {
+    width: 32px;
+    height: 32px;
+  }
+  .time-slider::-moz-range-thumb {
+    width: 32px;
+    height: 32px;
+  }
+  .time-slider { height: 10px; }
+}
+
+/* Safe area for notched phones */
+@supports (padding: max(0px)) {
+  .game-topbar { padding-left: max(1.25rem, env(safe-area-inset-left)); padding-right: max(1.25rem, env(safe-area-inset-right)); }
+  .game-body { padding-bottom: max(5rem, env(safe-area-inset-bottom)); }
+  .hub-section { padding-left: max(1.5rem, env(safe-area-inset-left)); padding-right: max(1.5rem, env(safe-area-inset-right)); }
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;min-height:100vh;}
+
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
+
+/* ─── HUB ─── */
+</style>
+</head>
+<body>
+
+<!-- ══ HUB ══ -->
+<div id="hub" class="screen active">
+  <div class="hub-hero">
+    <!-- Dark top section -->
+    <div class="hub-hero-top">
+      <div class="hub-eyebrow">Free Study Hub · Leonard Nwosu</div>
+      <h1 class="hub-title">GRE Math <em>Mastery Trainer</em></h1>
+      <p class="hub-sub">Every formula from the ETS Official Guide — 10 progressive games with audio. Study concepts at your own pace, then test yourself under timed conditions.</p>
+    </div>
+    <!-- Overlapping stats card -->
+    <div class="hub-stats-wrap">
+      <div class="hub-stats">
+        <div class="hub-stat"><strong>10</strong><span>Games</span></div>
+        <div class="hub-stat"><strong>97</strong><span>Questions</span></div>
+        <div class="hub-stat"><strong>100+</strong><span>Concepts</span></div>
+      </div>
+    </div>
+    <!-- Source badges -->
+    <div class="hub-sources">
+      <span class="hub-source-badge ets">✓ ETS Official Guide 2025</span>
+      <span class="hub-source-badge magoosh">✓ Magoosh GRE Prep</span>
+    </div>
+  </div>
+  <div class="hub-section">
+    <div class="section-label">Choose a game</div>
+    <div class="games-grid" id="gamesGrid"></div>
+  </div>
+  <footer class="site-footer">
+    <div class="sf-by">Prepared by</div>
+    <div class="sf-name">Leonard Nwosu</div>
+    <div class="sf-brand">Free Study Hub</div>
+    <div class="sf-links">
+      <a class="sf-link" href="tel:+2348032710570">📞 +234 803 271 0570</a>
+      <a class="sf-link" href="https://freestudyhub.store/" target="_blank">🌐 freestudyhub.store</a>
+      <a class="sf-link" href="https://www.youtube.com/@LeonardNwosu-k8z" target="_blank">▶️ youtube.com/@LeonardNwosu-k8z</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ SETTINGS SCREEN ══ -->
+<div id="settings" class="screen">
+  <div class="settings-header">
+    <button class="back-btn" onclick="goHub()">← Games</button>
+    <div>
+      <div class="settings-title" id="sett-game-title"></div>
+      <div class="settings-subtitle">Customise your session before starting</div>
+    </div>
+  </div>
+  <div class="settings-body">
+
+    <!-- Mode -->
+    <div class="sett-section">
+      <div class="sett-label">Learning mode</div>
+      <div class="mode-grid">
+        <div class="mode-card selected" id="mode-study" onclick="selectMode('study')">
+          <span class="mode-icon">📖</span>
+          <div class="mode-name">Study Mode</div>
+          <div class="mode-desc">Step through concepts manually. Explanations shown immediately after each answer. No pressure — no countdown.</div>
+        </div>
+        <div class="mode-card" id="mode-test" onclick="selectMode('test')">
+          <span class="mode-icon">⏱️</span>
+          <div class="mode-name">Test Mode</div>
+          <div class="mode-desc">Timed quiz. Concepts auto-advance. Explanations shown only in the review at the end.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Concept time (shown only in test mode) -->
+    <div class="sett-section" id="sett-concept-time">
+      <div class="sett-label">Time per concept</div>
+
+      <!-- Slider -->
+      <div class="time-slider-wrap">
+        <div class="time-slider-header">
+          <span class="time-slider-label">Drag to set how long each concept stays on screen</span>
+          <span class="time-slider-value" id="concept-time-display">15s</span>
+        </div>
+        <input
+          type="range"
+          class="time-slider"
+          id="concept-slider"
+          min="2" max="90" step="1" value="15"
+          oninput="onConceptSlider(this.value)"
+        />
+        <div class="time-slider-ticks">
+          <span>2s</span><span>15s</span><span>30s</span><span>45s</span><span>60s</span><span>75s</span><span>90s</span>
+        </div>
+      </div>
+
+      <!-- Quick-pick chips -->
+      <div class="chip-row" id="concept-chips">
+        <div class="chip" onclick="setConceptTime(2,this)" data-val="2">2s</div>
+        <div class="chip" onclick="setConceptTime(5,this)" data-val="5">5s</div>
+        <div class="chip" onclick="setConceptTime(10,this)" data-val="10">10s</div>
+        <div class="chip selected" onclick="setConceptTime(15,this)" data-val="15">15s ★</div>
+        <div class="chip" onclick="setConceptTime(20,this)" data-val="20">20s</div>
+        <div class="chip" onclick="setConceptTime(30,this)" data-val="30">30s</div>
+        <div class="chip" onclick="setConceptTime(45,this)" data-val="45">45s</div>
+        <div class="chip" onclick="setConceptTime(60,this)" data-val="60">1 min</div>
+        <div class="chip" onclick="setConceptTime(90,this)" data-val="90">90s</div>
+        <div class="chip" onclick="setConceptTime(0,this)" data-val="0">∞ Unlimited</div>
+      </div>
+    </div>
+
+    <!-- Quiz time limit -->
+    <div class="sett-section" id="sett-quiz-time">
+      <div class="sett-label">Quiz time limit</div>
+      <div class="chip-row" id="quiz-chips">
+        <div class="chip" onclick="selectQuizTime(2,this)">2 min</div>
+        <div class="chip" onclick="selectQuizTime(3,this)">3 min</div>
+        <div class="chip selected" onclick="selectQuizTime(5,this)">5 min</div>
+        <div class="chip" onclick="selectQuizTime(8,this)">8 min</div>
+        <div class="chip" onclick="selectQuizTime(10,this)">10 min</div>
+        <div class="chip" onclick="selectQuizTime(15,this)">15 min</div>
+        <div class="chip" onclick="selectQuizTime(0,this)">No limit</div>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="sett-summary" id="sett-summary"></div>
+
+    <button class="btn-primary" onclick="launchGame()">Start session →</button>
+  </div>
+</div>
+
+<!-- ══ GAME SCREEN ══ -->
+<div id="game" class="screen">
+  <div class="game-topbar">
+    <button class="back-btn" onclick="goSettingsFromGame()">← Settings</button>
+    <div class="topbar-title" id="topbarTitle"></div>
+    <span class="topbar-mode-badge study" id="topbarMode">Study</span>
+    <div class="topbar-timer" id="topbarTimer" style="display:none">—</div>
+  </div>
+  <div class="game-body">
+
+    <!-- INTRO PHASE -->
+    <div id="ph-intro" style="display:none;">
+      <div class="intro-card">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;" id="intro-eyebrow"></div>
+        <h2 id="intro-title"></h2>
+        <p id="intro-desc"></p>
+        <div class="intro-steps">
+          <div class="istep"><span class="istep-num" id="intro-ccount"></span><p>concepts</p></div>
+          <div class="istep"><span class="istep-num" id="intro-qcount"></span><p>questions</p></div>
+          <div class="istep"><span class="istep-num" id="intro-time-display"></span><p id="intro-time-label">minutes</p></div>
+        </div>
+      </div>
+      <div class="intro-settings-summary" id="intro-sett-summary"></div>
+      <button class="btn-primary" onclick="startLearn()">Start learning →</button>
+    </div>
+
+    <!-- LEARN PHASE -->
+    <div id="ph-learn" style="display:none;">
+      <div class="prog-row"><span id="learn-ctr">Concept 1</span><span id="learn-tick" class="tick-badge">—</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="learn-bar" style="width:0%"></div></div>
+      <div class="concept-card">
+        <div class="cc-cat" id="cc-cat"></div>
+        <div class="cc-term" id="cc-term"></div>
+        <div class="cc-def" id="cc-def"></div>
+        <div class="cc-formula" id="cc-formula" style="display:none"></div>
+        <div class="cc-diagram" id="cc-diagram"></div>
+      </div>
+      <!-- Study mode: manual nav buttons -->
+      <div class="study-nav" id="study-nav" style="display:none;">
+        <button class="btn-prev" onclick="prevConcept()">← Previous</button>
+        <button class="btn-next-concept" onclick="nextConcept()">Next →</button>
+      </div>
+      <!-- Test mode: auto hint -->
+      <p class="learn-hint" id="auto-hint" style="display:none;">Next concept loads automatically</p>
+    </div>
+
+    <!-- READY PHASE -->
+    <div id="ph-ready" style="display:none;">
+      <div class="ready-card">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem;">Concepts complete</div>
+        <h2>Ready to <em style="font-style:italic;color:var(--accent);">practise?</em></h2>
+        <p id="ready-desc" style="margin-top:.5rem;"></p>
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">Begin quiz →</button>
+      <button class="btn-secondary" onclick="startLearn()">↺ Review concepts again</button>
+    </div>
+
+    <!-- QUIZ PHASE -->
+    <div id="ph-quiz" style="display:none;">
+      <div class="prog-row"><span id="q-ctr">Q 1</span><span></span></div>
+      <div class="prog-bar"><div class="prog-fill" id="q-bar" style="width:0%"></div></div>
+      <div class="q-card">
+        <div class="q-diagram" id="q-diagram"></div>
+        <div class="q-text" id="q-text"></div>
+        <div class="opts" id="q-opts"></div>
+        <!-- Study mode: inline explanation -->
+        <div class="study-exp-box" id="study-exp"></div>
+      </div>
+      <div class="q-hint" id="q-hint"></div>
+      <!-- Study mode: next question button (shown after answering) -->
+      <button class="btn-primary" id="study-next-btn" style="display:none;margin-top:.75rem;" onclick="studyNextQ()">Next question →</button>
+    </div>
+
+    <!-- RESULTS PHASE -->
+    <div id="ph-results" style="display:none;">
+      <div class="score-wrap">
+        <div class="score-label">Your score</div>
+        <div class="score-num" id="s-pct"></div>
+        <div class="score-msg" id="s-msg"></div>
+      </div>
+      <div class="met-row">
+        <div class="met"><span class="met-val" id="m-cor" style="color:var(--green)"></span><div class="met-lbl">Correct</div></div>
+        <div class="met"><span class="met-val" id="m-wrg" style="color:var(--red)"></span><div class="met-lbl">Wrong</div></div>
+        <div class="met"><span class="met-val" id="m-tim"></span><div class="met-lbl">Time used</div></div>
+      </div>
+      <div class="rev-title">Question review</div>
+      <div id="revlist"></div>
+      <button class="btn-primary" onclick="restartGame()">Try again ↺</button>
+      <button class="btn-secondary" onclick="goHub()">← Back to all games</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════
+// DIAGRAMS — reusable SVG strings
+// ══════════════════════════════════════════════════════════════════
+const D = {
+  fractions: `<svg viewBox="0 0 300 80" style="display:block;margin:auto;width:100%;max-width:280px" style="display:block;margin:auto;">
+    <rect x="10" y="10" width="80" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="50" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">a + c</text>
+    <line x1="10" y1="44" x2="90" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="50" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+    <text x="105" y="38" font-family="Nunito" font-size="18" fill="#9a8e78">=</text>
+    <rect x="120" y="10" width="40" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="140" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">a</text>
+    <line x1="120" y1="44" x2="160" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="140" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+    <text x="168" y="38" font-family="Nunito" font-size="18" fill="#9a8e78">+</text>
+    <rect x="180" y="10" width="40" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="200" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">c</text>
+    <line x1="180" y1="44" x2="220" y2="44" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="200" y="60" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">b</text>
+  </svg>`,
+
+  bowtie: `<svg viewBox="0 0 260 70" style="display:block;margin:auto;width:100%;max-width:240px" style="display:block;margin:auto;">
+    <text x="30" y="28" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">a</text>
+    <line x1="18" y1="38" x2="42" y2="38" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="30" y="55" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">b</text>
+    <text x="62" y="42" font-family="Nunito" font-size="20" fill="#c8830a">&gt;</text>
+    <text x="100" y="28" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">c</text>
+    <line x1="88" y1="38" x2="112" y2="38" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="100" y="55" text-anchor="middle" font-family="IBM Plex Mono" font-size="16" fill="#1a6b4a">d</text>
+    <text x="128" y="42" font-family="Nunito" font-size="14" fill="#9a8e78">if ad &gt; bc</text>
+    <line x1="30" y1="55" x2="100" y2="28" stroke="#c8830a" stroke-width="1.2" stroke-dasharray="3,2" opacity=".7"/>
+    <line x1="100" y1="55" x2="30" y2="28" stroke="#c8830a" stroke-width="1.2" stroke-dasharray="3,2" opacity=".7"/>
+  </svg>`,
+
+  quadratic: `<svg viewBox="0 0 300 70" style="display:block;margin:auto;width:100%;max-width:280px" style="display:block;margin:auto;">
+    <rect x="5" y="8" width="290" height="54" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="150" y="30" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">Quadratic Formula</text>
+    <text x="150" y="52" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" fill="#1a6b4a">x = (−b ± √(b^2−4ac)) / 2a</text>
+  </svg>`,
+
+  foil: `<svg viewBox="0 0 300 110" style="display:block;margin:auto;width:100%;max-width:280px" style="display:block;margin:auto;">
+    <text x="20" y="30" font-family="IBM Plex Mono" font-size="15" fill="#1a6b4a">(x + p)(x + q)</text>
+    <path d="M25,35 Q75,70 130,35" stroke="#c8830a" stroke-width="1.5" fill="none"/>
+    <text x="62" y="78" text-anchor="middle" font-family="Nunito" font-size="10" fill="#c8830a">First</text>
+    <path d="M25,35 Q105,95 175,35" stroke="#1a6b4a" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+    <text x="100" y="96" text-anchor="middle" font-family="Nunito" font-size="10" fill="#1a6b4a">Outside</text>
+    <path d="M85,35 Q115,75 130,35" stroke="#9a8e78" stroke-width="1.5" fill="none"/>
+    <text x="108" y="73" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">Inside</text>
+    <path d="M85,35 Q145,100 175,35" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+    <text x="150" y="96" text-anchor="middle" font-family="Nunito" font-size="10" fill="#c0392b">Last</text>
+  </svg>`,
+
+  pythagorean: `<svg viewBox="0 0 200 160" style="display:block;margin:auto;width:100%;max-width:180px" style="display:block;margin:auto;">
+    <polygon points="20,140 160,140 20,30" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="85" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">b</text>
+    <text x="8" y="85" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a</text>
+    <text x="103" y="82" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">c</text>
+    <text x="100" y="138" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">a^2 + b^2 = c^2</text>
+  </svg>`,
+
+  triangle4590: `<svg viewBox="0 0 200 160" style="display:block;margin:auto;width:100%;max-width:180px" style="display:block;margin:auto;">
+    <polygon points="20,140 160,140 20,20" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="140" y="158" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">45°</text>
+    <text x="30" y="28" font-family="Nunito" font-size="11" fill="#1a6b4a">45°</text>
+    <text x="28" y="158" font-family="Nunito" font-size="11" fill="#9a8e78">90°</text>
+    <text x="85" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="8" y="80" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="108" y="76" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">x√2</text>
+  </svg>`,
+
+  triangle3060: `<svg viewBox="0 0 220 160" style="display:block;margin:auto;width:100%;max-width:200px" style="display:block;margin:auto;">
+    <polygon points="20,140 200,140 20,20" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <rect x="20" y="120" width="20" height="20" fill="none" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="185" y="158" font-family="Nunito" font-size="11" fill="#1a6b4a">30°</text>
+    <text x="28" y="28" font-family="Nunito" font-size="11" fill="#1a6b4a">60°</text>
+    <text x="28" y="158" font-family="Nunito" font-size="11" fill="#9a8e78">90°</text>
+    <text x="105" y="158" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x√3</text>
+    <text x="8" y="80" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">x</text>
+    <text x="120" y="76" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">2x</text>
+  </svg>`,
+
+  circle: `<svg viewBox="0 0 200 160" style="display:block;margin:auto;width:100%;max-width:180px" style="display:block;margin:auto;">
+    <circle cx="100" cy="80" r="65" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <line x1="100" y1="80" x2="165" y2="80" stroke="#c8830a" stroke-width="1.5"/>
+    <text x="132" y="72" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">r</text>
+    <line x1="35" y1="80" x2="165" y2="80" stroke="#1a6b4a" stroke-width="1" stroke-dasharray="3,3"/>
+    <text x="100" y="108" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#9a8e78">diameter = 2r</text>
+    <text x="100" y="148" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">A = pi×r^2  C = 2×pi×r</text>
+    <circle cx="100" cy="80" r="3" fill="#c8830a"/>
+  </svg>`,
+
+  coordinate: `<svg viewBox="0 0 200 180" style="display:block;margin:auto;width:100%;max-width:180px" style="display:block;margin:auto;">
+    <line x1="10" y1="90" x2="190" y2="90" stroke="#9a8e78" stroke-width="1.2"/>
+    <line x1="100" y1="10" x2="100" y2="170" stroke="#9a8e78" stroke-width="1.2"/>
+    <text x="188" y="86" font-family="IBM Plex Mono" font-size="10" fill="#9a8e78">x</text>
+    <text x="104" y="14" font-family="IBM Plex Mono" font-size="10" fill="#9a8e78">y</text>
+    <text x="110" y="86" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">I(+,+)</text>
+    <text x="50" y="86" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">II(−,+)</text>
+    <text x="50" y="120" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">III(−,−)</text>
+    <text x="108" y="120" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">IV(+,−)</text>
+    <line x1="40" y1="150" x2="170" y2="30" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="160" y="28" font-family="Nunito" font-size="10" fill="#1a6b4a">slope=m</text>
+  </svg>`,
+
+  normalcurve: `<svg viewBox="0 0 300 130" style="display:block;margin:auto;width:100%;max-width:280px" style="display:block;margin:auto;">
+    <path d="M10,110 Q50,110 80,105 Q100,100 110,70 Q125,20 150,10 Q175,20 190,70 Q200,100 220,105 Q250,110 290,110" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.5"/>
+    <line x1="150" y1="10" x2="150" y2="110" stroke="#c8830a" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="150" y="122" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">mean</text>
+    <rect x="110" y="10" width="80" height="100" fill="rgba(26,107,74,0.08)" stroke="none"/>
+    <text x="150" y="60" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">68%</text>
+    <text x="150" y="75" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">±1 SD</text>
+    <text x="50" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">−2SD</text>
+    <text x="250" y="100" text-anchor="middle" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">+2SD</text>
+    <text x="150" y="8" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">95% within ±2 SD</text>
+  </svg>`,
+
+  venn2: `<svg viewBox="0 0 260 120" style="display:block;margin:auto;width:100%;max-width:240px" style="display:block;margin:auto;">
+    <circle cx="90" cy="60" r="50" fill="rgba(26,107,74,0.12)" stroke="#1a6b4a" stroke-width="1.5"/>
+    <circle cx="170" cy="60" r="50" fill="rgba(200,131,10,0.12)" stroke="#c8830a" stroke-width="1.5"/>
+    <text x="65" y="63" text-anchor="middle" font-family="Nunito" font-size="11" fill="#1a6b4a">A only</text>
+    <text x="130" y="63" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5a4e38">AANDB</text>
+    <text x="195" y="63" text-anchor="middle" font-family="Nunito" font-size="11" fill="#c8830a">B only</text>
+    <text x="130" y="110" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">n(AORB) = n(A)+n(B)−n(AANDB)</text>
+  </svg>`,
+
+  absvalue: `<svg viewBox="0 0 220 100" style="display:block;margin:auto;width:100%;max-width:200px" style="display:block;margin:auto;">
+    <line x1="10" y1="90" x2="210" y2="90" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="110" y1="10" x2="110" y2="95" stroke="#9a8e78" stroke-width="1"/>
+    <polyline points="10,90 110,10 210,90" fill="none" stroke="#1a6b4a" stroke-width="2"/>
+    <text x="110" y="8" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">vertex (0,0)</text>
+    <text x="110" y="105" text-anchor="middle" font-family="Nunito" font-size="10" fill="#9a8e78">y = |x|</text>
+  </svg>`,
+
+  slopeint: `<svg viewBox="0 0 200 160" style="display:block;margin:auto;width:100%;max-width:180px" style="display:block;margin:auto;">
+    <line x1="10" y1="80" x2="190" y2="80" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="100" y1="10" x2="100" y2="155" stroke="#9a8e78" stroke-width="1"/>
+    <line x1="20" y1="140" x2="180" y2="20" stroke="#1a6b4a" stroke-width="2"/>
+    <circle cx="100" cy="60" r="4" fill="#c8830a"/>
+    <text x="110" y="58" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">y-intercept (b)</text>
+    <line x1="130" y1="44" x2="170" y2="44" stroke="#c8830a" stroke-width="1" stroke-dasharray="2,2"/>
+    <line x1="170" y1="44" x2="170" y2="20" stroke="#c8830a" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="175" y="34" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">rise</text>
+    <text x="148" y="52" font-family="IBM Plex Mono" font-size="9" fill="#9a8e78">run</text>
+    <text x="30" y="148" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">y = mx + b</text>
+  </svg>`,
+
+  arithmetic_seq: `<svg viewBox="0 0 280 70" style="display:block;margin:auto;width:100%;max-width:260px" style="display:block;margin:auto;">
+    <rect x="5" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="27" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a_1</text>
+    <text x="60" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <rect x="80" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="102" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a_2</text>
+    <text x="135" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <rect x="155" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="177" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">a_3</text>
+    <text x="210" y="34" font-family="Nunito" font-size="16" fill="#9a8e78">+d</text>
+    <text x="235" y="34" font-family="IBM Plex Mono" font-size="12" fill="#9a8e78">…</text>
+    <text x="140" y="62" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#c8830a">a_n = a_1 + (n−1)d</text>
+  </svg>`,
+
+  geo_seq: `<svg viewBox="0 0 280 70" style="display:block;margin:auto;width:100%;max-width:260px" style="display:block;margin:auto;">
+    <rect x="5" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="27" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a_1</text>
+    <text x="58" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <rect x="80" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="102" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a_2</text>
+    <text x="133" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <rect x="155" y="15" width="45" height="30" rx="4" fill="#e8f4ee" stroke="#c8830a" stroke-width="1"/>
+    <text x="177" y="35" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" fill="#c8830a">a_3</text>
+    <text x="208" y="34" font-family="Nunito" font-size="14" fill="#9a8e78">×r</text>
+    <text x="235" y="34" font-family="IBM Plex Mono" font-size="12" fill="#9a8e78">…</text>
+    <text x="140" y="62" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#1a6b4a">a_n = a_1 × r^(n−1)</text>
+  </svg>`,
+
+  perm_comb: `<svg viewBox="0 0 280 90" style="display:block;margin:auto;width:100%;max-width:260px" style="display:block;margin:auto;">
+    <rect x="5" y="10" width="125" height="65" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1.2"/>
+    <text x="67" y="30" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="700" fill="#1a6b4a">Combination</text>
+    <text x="67" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#1a6b4a">n! / (k!(n−k)!)</text>
+    <text x="67" y="65" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">Order does NOT matter</text>
+    <rect x="150" y="10" width="125" height="65" rx="6" fill="#fff5e6" stroke="#c8830a" stroke-width="1.2"/>
+    <text x="212" y="30" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="700" fill="#c8830a">Permutation</text>
+    <text x="212" y="48" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#c8830a">n! / (n−k)!</text>
+    <text x="212" y="65" text-anchor="middle" font-family="Nunito" font-size="9" fill="#9a8e78">Order DOES matter</text>
+  </svg>`,
+
+  prob_basic: `<svg viewBox="0 0 260 80" style="display:block;margin:auto;width:100%;max-width:240px" style="display:block;margin:auto;">
+    <rect x="5" y="10" width="250" height="55" rx="6" fill="#e8f4ee" stroke="#1a6b4a" stroke-width="1"/>
+    <text x="130" y="32" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9a8e78">favorable outcomes</text>
+    <line x1="40" y1="40" x2="220" y2="40" stroke="#1a6b4a" stroke-width="1.5"/>
+    <text x="130" y="58" text-anchor="middle" font-family="Nunito" font-size="11" fill="#9a8e78">total outcomes</text>
+    <text x="20" y="44" font-family="IBM Plex Mono" font-size="12" fill="#1a6b4a">P =</text>
+  </svg>`,
+};
+
+// ══════════════════════════════════════════════════════════════════
+// GAME DATA — 10 games, every PDF topic
+// ══════════════════════════════════════════════════════════════════
+const GAMES = [
+{id:0,title:"Fractions & Basic Arithmetic",eyebrow:"Game 1 of 10",desc:"Adding, subtracting, multiplying and dividing fractions. Bow-Tie comparison. Distributive property. Fraction to percent conversion.",time:4,
+concepts:[
+{cat:"Fractions",term:"Adding — same denominator",def:"Add numerators, keep denominator.",form:"a/b + c/b = (a+c)/b",diag:"fractions"},
+{cat:"Fractions",term:"Adding — different denominators",def:"Use cross-multiplication: (ad+bc)/bd.",form:"a/b + c/d = (ad+bc)/bd",diag:""},
+{cat:"Fractions",term:"Subtracting fractions",def:"Common denominator required. Different denoms: (ad−bc)/bd.",form:"a/b − c/d = (ad−bc)/bd",diag:""},
+{cat:"Fractions",term:"Multiplying fractions",def:"Multiply numerators together, denominators together.",form:"(a/b)×(c/d) = ac/bd",diag:""},
+{cat:"Fractions",term:"Dividing fractions",def:"Flip the second fraction, then multiply.",form:"a/b ÷ c/d = ad/bc",diag:""},
+{cat:"Fractions",term:"Bow-Tie comparison",def:"Cross-multiply: a/b > c/d when ad > bc.",form:"a/b > c/d if ad > bc",diag:"bowtie"},
+{cat:"Fractions",term:"Distributive property",def:"Split a fraction's numerator across the denominator.",form:"(a+c)/b = a/b + c/b",diag:""},
+{cat:"Fractions",term:"Reciprocals",def:"Flip numerator and denominator. Product of a number and its reciprocal = 1.",form:"x × (1/x) = 1",diag:""},
+{cat:"Fractions",term:"Fraction → percent",def:"Divide to get decimal, multiply by 100.",form:"(a/b) × 100 = %",diag:""},
+{cat:"Fractions",term:"Squares & square roots of fractions",def:"Square/root each part independently.",form:"(a/b)^2 = a^2/b^2  sqrt(x/y)=sqrt(x)/sqrt(y)",diag:""},
+],
+questions:[
+// ans: 0,1,2,3,0,1,2,3,0,1 — target distribution
+{q:"1/4 + 3/4 = ?",opts:["2/4","1/4","4/4","1"],ans:3,diag:"",exp:"Same denominator: (1+3)/4=4/4=1."},
+{q:"1/3 + 1/4 = ?",opts:["2/12","7/12","2/7","5/12"],ans:1,diag:"",exp:"Cross-multiply: (1×4+1×3)/12=7/12."},
+{q:"3/4 − 1/3 = ?",opts:["2/12","2/7","1/4","5/12"],ans:3,diag:"",exp:"(3×3−1×4)/12=(9−4)/12=5/12."},
+{q:"2/5 × 3/7 = ?",opts:["6/35","5/12","1/6","2/3"],ans:0,diag:"",exp:"Multiply across: (2×3)/(5×7)=6/35."},
+{q:"3/4 ÷ 9/8 = ?",opts:["27/32","4/3","3/8","2/3"],ans:3,diag:"",exp:"Flip and multiply: 3/4 × 8/9=24/36=2/3."},
+{q:"Compare 5/8 and 3/5. Which is larger?",opts:["5/8","They are equal","3/5","Cannot determine"],ans:0,diag:"bowtie",exp:"Bow-Tie: 5×5=25 vs 3×8=24. 25>24 → 5/8 > 3/5."},
+{q:"Which correctly applies the distributive property to (a+c)/b?",opts:["(a+c)/b^2","a/b + c/b","a/b × c/b","Cannot simplify"],ans:1,diag:"",exp:"(a+c)/b=a/b+c/b. The denominator distributes across the sum."},
+{q:"Reciprocal of 4/9 is:",opts:["−4/9","9/4","4/9","1/9"],ans:1,diag:"",exp:"Flip numerator and denominator: 4/9 → 9/4. Check: 4/9 × 9/4=1."},
+{q:"Convert 5/8 to a percent.",opts:["62.5%","58%","80%","65%"],ans:0,diag:"",exp:"5÷8=0.625. ×100=62.5%."},
+{q:"(2/3)^2 = ?",opts:["2/9","4/9","2/3","4/6"],ans:1,diag:"",exp:"Square both parts: 2^2/3^2=4/9."},
+]},
+{id:1,title:"Linear & Quadratic Equations",eyebrow:"Game 2 of 10",desc:"Factoring, quadratic formula, FOIL, quadratic identities, PEMDAS, zero product property.",time:5,
+concepts:[
+{cat:"Equations",term:"Factoring common factors",def:"Pull out a shared factor from all terms.",form:"ab+ac=a(b+c)",diag:""},
+{cat:"Equations",term:"General form: quadratic",def:"ax^2 + bx + c = 0. Must be in this form before factoring or using the formula.",form:"ax^2 + bx + c = 0",diag:"quadratic"},
+{cat:"Equations",term:"Factoring a quadratic",def:"Find p,q: multiply to c and add to b. Then (x+p)(x+q)=0.",form:"x^2 + bx + c = (x+p)(x+q)",diag:""},
+{cat:"Equations",term:"Quadratic formula",def:"Works on any quadratic. Discriminant b^2−4ac tells number of real roots.",form:"x = (-b ± sqrt(b^2-4ac)) / 2a",diag:"quadratic"},
+{cat:"Equations",term:"Zero product property",def:"If ab=0 then a=0 or b=0.",form:"ab=0 → a=0 or b=0",diag:""},
+{cat:"Equations",term:"FOIL method",def:"First×Outside×Inside×Last to expand two binomials.",form:"(x+p)(x+q) = x^2 + (p+q)x + pq",diag:"foil"},
+{cat:"Equations",term:"Identity: (x+y)^2",def:"Square of a sum. Never forget the middle term 2xy.",form:"(x+y)^2 = x^2 + 2xy + y^2",diag:""},
+{cat:"Equations",term:"Identity: (x−y)^2",def:"Square of a difference. Middle term is −2xy.",form:"(x-y)^2 = x^2 - 2xy + y^2",diag:""},
+{cat:"Equations",term:"Identity: difference of squares",def:"(x+y)(x−y) = x^2−y^2. Middle term vanishes.",form:"(x+y)(x-y) = x^2 - y^2",diag:""},
+{cat:"Equations",term:"PEMDAS",def:"Parentheses, Exponents, Multiply/Divide, Add/Subtract.",form:"P→E→MD→AS",diag:""},
+],
+questions:[
+{q:"Factor: 9x+9y",opts:["9(x+y)","9x(1+y)","(9+x)(y)","Cannot factor"],ans:0,diag:"",exp:"9 is common: 9x+9y=9(x+y)."},
+{q:"x^2+5x+6=0. Solutions?",opts:["x=6 or x=1","x=2 or x=3","x=−2 or x=−3","x=−6 or x=−1"],ans:2,diag:"",exp:"Find p,q: multiply to 6, add to 5 → 2 and 3. (x+2)(x+3)=0 → x=−2 or x=−3."},
+{q:"Quadratic formula for x^2−x−6=0. Discriminant?",opts:["−23","1","7","25"],ans:3,diag:"",exp:"b^2−4ac=(−1)^2−4(1)(−6)=1+24=25."},
+{q:"(x+5)(x−2)=0 implies:",opts:["x=5 or x=2","x=−5 and x=2","x=−5 or x=2","x=3"],ans:2,diag:"",exp:"Zero product: x+5=0→x=−5; x−2=0→x=2."},
+{q:"Expand (x+4)^2",opts:["x^2+16","x^2+4x+16","x^2+8x+8","x^2+8x+16"],ans:3,diag:"",exp:"(x+y)^2 = x^2 + 2xy + y^2. y=4: x^2+8x+16."},
+{q:"Expand (x−3)^2",opts:["x^2−3x+9","x^2−6x+9","x^2+9","x^2+6x+9"],ans:1,diag:"",exp:"(x-y)^2 = x^2 - 2xy + y^2. y=3: x^2−6x+9."},
+{q:"Factor x^2−25",opts:["(x−5)^2","(x+25)(x−1)","x(x−25)","(x+5)(x−5)"],ans:3,diag:"",exp:"Difference of squares: x^2−25=(x+5)(x−5)."},
+{q:"FOIL: (x+3)(x−7)",opts:["x^2−4x−21","x^2−4x+21","x^2−10x+21","x^2−21"],ans:0,diag:"foil",exp:"x^2−7x+3x−21=x^2−4x−21."},
+{q:"Evaluate: 5+2×3−(4−2)^2",opts:["3","7","9","5"],ans:1,diag:"",exp:"PEMDAS: Parentheses first: (4−2)=2. Exponent: 2^2=4. Multiply: 2×3=6. Then left to right: 5+6−4=7."},
+{q:"Discriminant >0 means:",opts:["No real roots","Two distinct real roots","One repeated root","Cannot determine"],ans:1,diag:"",exp:"b^2−4ac>0 → square root is real and positive → two distinct real roots."},
+]},
+{id:2,title:"Number Properties",eyebrow:"Game 3 of 10",desc:"Even/odd rules, primes, factors, divisibility, LCM, GCF, remainders, trailing zeros, terminating decimals.",time:5,
+concepts:[
+{cat:"Number Properties",term:"Even/Odd addition rules",def:"odd+odd=even. even+even=even. even+odd=odd.",form:"odd+odd=even; even+odd=odd",diag:""},
+{cat:"Number Properties",term:"Even/Odd multiplication",def:"even×anything=even. odd×odd=odd.",form:"even×n=even; odd×odd=odd",diag:""},
+{cat:"Number Properties",term:"Prime numbers",def:">1, only factors are 1 and itself. 2 is only even prime. 1 is NOT prime.",form:"2,3,5,7,11,13,17,19,23…",diag:""},
+{cat:"Number Properties",term:"Counting factors",def:"Prime factorise, add 1 to each exponent, multiply results.",form:"240=2^4 × 3^1 × 5^1 → (5)(2)(2) = 20 factors",diag:""},
+{cat:"Number Properties",term:"LCM",def:"Highest power of every prime in either number.",form:"LCM(12,18)=2^2 × 3^2 = 36",diag:""},
+{cat:"Number Properties",term:"GCF",def:"Lowest power of primes common to BOTH.",form:"GCF(12,18) = 2 × 3 = 6",diag:""},
+{cat:"Number Properties",term:"LCM×GCF = product",def:"For any two integers: LCM(x,y)×GCF(x,y)=x×y.",form:"LCM×GCF=x×y",diag:""},
+{cat:"Number Properties",term:"Divisibility rules",def:"÷2: last digit even. ÷3: digit sum÷3. ÷5: ends 0 or 5. ÷9: digit sum÷9.",form:"digit sum÷3 → number÷3",diag:""},
+{cat:"Number Properties",term:"Remainders",def:"Non-negative and less than the divisor. x/y=quotient+remainder/y.",form:"23÷5 = 4 rem 3",diag:""},
+{cat:"Number Properties",term:"Trailing zeros & decimals",def:"Trailing zeros=(5×2) pairs. Decimal terminates only if denominator has 2s and 5s only.",form:"trailing zeros = count of (2×5) pairs",diag:""},
+],
+questions:[
+{q:"even + odd = ?",opts:["even","odd","sometimes odd","0"],ans:1,diag:"",exp:"even+odd is always odd. e.g. 4+3=7."},
+{q:"Which product is always odd?",opts:["even × even","even × odd","odd × even","odd × odd"],ans:3,diag:"",exp:"Only odd×odd=odd. Any factor of even makes the product even."},
+{q:"Which of these is prime?",opts:["49","51","53","57"],ans:2,diag:"",exp:"49=7^2, 51=3×17, 57=3×19. 53 has no factors other than 1 and 53."},
+{q:"How many positive factors does 48 have?",opts:["6","8","12","10"],ans:3,diag:"",exp:"48=2^4×3^1. (4+1)(1+1)=10."},
+{q:"LCM(6,10) = ?",opts:["60","20","30","15"],ans:2,diag:"",exp:"6=2×3; 10=2×5. LCM=2×3×5=30."},
+{q:"GCF(24,36) = ?",opts:["6","4","18","12"],ans:3,diag:"",exp:"24=2^3×3; 36=2^2×3^2. GCF=2^2×3=12."},
+{q:"LCM(4,6)=12, GCF(4,6)=2. Verify: LCM×GCF=?",opts:["14","24","20","8"],ans:1,diag:"",exp:"12×2=24=4×6. ✓"},
+{q:"Is 7,236 divisible by 9?",opts:["Only if even","Yes","No","Cannot tell"],ans:1,diag:"",exp:"7+2+3+6=18. 18÷9=2 exactly → yes."},
+{q:"Remainder when 58 ÷ 7?",opts:["1","8","0","2"],ans:3,diag:"",exp:"7×8=56. 58−56=2. The remainder is 2. (Remainder must always be less than the divisor.)"},
+{q:"Does 3/40 terminate as a decimal?",opts:["Yes — 40=2^3×5","No, 40 has factor 3","Cannot tell","No, never"],ans:0,diag:"",exp:"40=2^3×5. Only factors 2 and 5 → decimal terminates. 3/40=0.075."},
+]},
+{id:3,title:"Roots & Exponents",eyebrow:"Game 4 of 10",desc:"Exponent rules, negative exponents, fractional exponents, radical operations, special addition rule.",time:5,
+concepts:[
+{cat:"Exponents",term:"Multiplication — like bases",def:"Add exponents when multiplying same base.",form:"x^a × x^b=x^(a+b)",diag:""},
+{cat:"Exponents",term:"Division — like bases",def:"Subtract bottom exponent from top.",form:"x^a / x^b=x^(a-b)",diag:""},
+{cat:"Exponents",term:"Power to a power",def:"Multiply the exponents.",form:"(x^a)^b=x^(ab)",diag:""},
+{cat:"Exponents",term:"Negative exponents",def:"x^(-n)=1/x^n. Flipping a fraction with negative exponent inverts it.",form:"x^(-n)=1/x^n",diag:""},
+{cat:"Exponents",term:"Zero and first power",def:"x^0 = 1 (any nonzero base). x^1 = x.",form:"x^0=1  x^1=x",diag:""},
+{cat:"Exponents",term:"Radicals as exponents",def:"sqrt(x)=x^(1/2). cbrt(x)=x^(1/3). b-root(x^a)=x^(a/b).",form:"sqrt(x)=x^(1/2)  cbrt(x)=x^(1/3)",diag:""},
+{cat:"Exponents",term:"Multiplying/dividing radicals",def:"√a×√b=√(ab). √a/√b=√(a/b).",form:"√a×√b=√(ab)",diag:""},
+{cat:"Exponents",term:"Adding radicals — caution!",def:"√(a+b) != √a+√b. Only identical radicands can be added.",form:"3√5+2√5=5√5  BUT √4+√9!=√13",diag:""},
+{cat:"Exponents",term:"Special addition rule",def:"n copies of x^m = n×x^m. When n equals the base: same exponent +1.",form:"2^n + 2^n = 2^(n+1)  3^n + 3^n + 3^n = 3^(n+1)",diag:""},
+{cat:"Exponents",term:"Exponent number properties",def:"Base>1: grows. 0<base<1: shrinks. Negative base, even exponent: positive.",form:"(1/2)^2 = 1/4 < 1/2  (-2)^4 = 16 > 0",diag:""},
+],
+questions:[
+{q:"Simplify: y^3 × y^5",opts:["y^1^5","y^2","y⁶","y⁸"],ans:3,diag:"",exp:"Add exponents: y^(3+5)=y⁸."},
+{q:"Simplify: z^1^0 / z^4",opts:["z^1^4","z⁶","z^4^0","z^2·^5"],ans:1,diag:"",exp:"Subtract: z^(10−4)=z⁶."},
+{q:"Simplify: (y^2)⁶",opts:["y⁸","y^3","y^2·⁶","y^1^2"],ans:3,diag:"",exp:"Power to a power: y^(2×6)=y^1^2."},
+{q:"Simplify: 5^-^2",opts:["−25","−1/25","1/25","25"],ans:2,diag:"",exp:"5^-^2=1/5^2=1/25."},
+{q:"What is (4/3)^-^1?",opts:["3/4","−4/3","4/3","−3/4"],ans:0,diag:"",exp:"Negative exponent: flip fraction. (4/3)^-^1=3/4."},
+{q:"Express ^5√x^3 as a fractional exponent.",opts:["x^(5/3)","x^(1/5)","x^(15)","x^(3/5)"],ans:3,diag:"",exp:"b-root(x^a) = x^(a/b). a=3, b=5: x^(3/5)."},
+{q:"Simplify √50",opts:["10√2","5√10","5√2","25√2"],ans:2,diag:"",exp:"√50=√(25×2)=5√2."},
+{q:"√36 + √64 = ?",opts:["14","√100","10","100"],ans:0,diag:"",exp:"√36=6, √64=8. Sum=14. Note: this is NOT √(36+64)=√100=10."},
+{q:"3^n + 3^n + 3^n equals:",opts:["3^n^+^1","9^n","3^(3n)","3^n^+^3"],ans:0,diag:"",exp:"Three copies of 3^n = 3×3^n=3^1×3^n=3^n^+^1."},
+{q:"(−3)^2 compared to −3: which is larger?",opts:["−3^2","(−3)^2","They are equal","Cannot tell"],ans:1,diag:"",exp:"(−3)^2=9 and −3 is negative. 9>−3, so (−3)^2 is larger."},
+]},
+{id:4,title:"Inequalities & Absolute Values",eyebrow:"Game 5 of 10",desc:"Absolute value equations, triangle inequality, compound inequalities, flipping signs.",time:4,
+concepts:[
+{cat:"Absolute Values",term:"Definition",def:"|a| = distance from 0. Always non-negative.",form:"|a|=a if a>=0;  |a|=−a if a<0",diag:"absvalue"},
+{cat:"Absolute Values",term:"One absolute value",def:"Split into two cases: + and − versions of the right side.",form:"|2x+4|=12 → 2x+4=±12",diag:""},
+{cat:"Absolute Values",term:"Two equal absolute values",def:"|A|=|B| means A=B or A=−B.",form:"|A|=|B|→A=B or A=−B",diag:""},
+{cat:"Absolute Values",term:"Triangle inequality",def:"|a+b|<=|a|+|b| always. Equality when same sign.",form:"|a+b|<=|a|+|b|",diag:""},
+{cat:"Absolute Values",term:"Subtracting absolute values",def:"|a−b|>=|a|−|b| always.",form:"|a−b|>=|a|−|b|",diag:""},
+{cat:"Inequalities",term:"Flip sign rule",def:"Multiply/divide both sides by negative → flip inequality.",form:"−x>5 → x<−5",diag:""},
+{cat:"Inequalities",term:"Compound inequalities",def:"Apply the same operation to all three parts.",form:"2<3x+1<10 → 1/3<x<3",diag:""},
+],
+questions:[
+{q:"|−36| = ?",opts:["−36","0","3.6","36"],ans:3,diag:"",exp:"Absolute value is always non-negative. |−36|=36."},
+{q:"Solve |x+5|=8. Solutions?",opts:["x=3 only","x=13 or x=−3","x=3 or x=−13","x=−3 only"],ans:2,diag:"",exp:"x+5=8→x=3; x+5=−8→x=−13."},
+{q:"|x−4|=|2x+1|. Which is a solution?",opts:["x=−4","x=5","x=1","x=−5"],ans:3,diag:"",exp:"Case 1: x−4=2x+1→−5=x. Case 2: x−4=−(2x+1)→3x=3→x=1. Solutions: x=−5 or x=1."},
+{q:"|3|+|−4| vs |3+(−4)|. Which is larger?",opts:["They are equal","Cannot tell","|3|+|−4|","|3+(−4)|"],ans:2,diag:"",exp:"|3|+|−4|=3+4=7. |3+(−4)|=|−1|=1. 7>1, confirming the triangle inequality."},
+{q:"If −5x > 25, then:",opts:["x>5","x>−5","x<5","x<−5"],ans:3,diag:"",exp:"Divide by −5 and FLIP: x<25/(−5)=−5."},
+{q:"Solve: −3 < x+2 < 7",opts:["−1<x<9","−3<x<7","−5<x<5","−1<x<5"],ans:2,diag:"",exp:"Subtract 2 from all parts: −5<x<5."},
+{q:"|5−8| vs |5|−|8|. Are they equal?",opts:["No","Yes","Only when positive","Cannot tell"],ans:0,diag:"",exp:"|5−8|=|−3|=3. |5|−|8|=5−8=−3. 3!=−3 → NOT equal. |a−b|>=|a|−|b|."},
+]},
+{id:5,title:"Word Problems: Interest, Rates & Sequences",eyebrow:"Game 6 of 10",desc:"Simple/compound interest, rate-time-distance, work problems, consecutive integers, arithmetic and geometric sequences.",time:5,
+concepts:[
+{cat:"Word Problems",term:"Simple interest",def:"Interest on principal only. I=PRT.",form:"I=P×R×T",diag:""},
+{cat:"Word Problems",term:"Compound interest",def:"Interest earns interest. A=P(1+r/n)^(nt).",form:"A=P(1+r/n)^(nt)",diag:""},
+{cat:"Word Problems",term:"Rate-Time-Distance",def:"D=R×T. Rearrange for any unknown.",form:"D=R×T",diag:""},
+{cat:"Word Problems",term:"Average speed",def:"Total distance ÷ total time. Never average speeds.",form:"Avg speed = total D / total T",diag:""},
+{cat:"Word Problems",term:"Work formula",def:"Rate×Time=Work. Combined: add individual rates.",form:"W=R×T  combined: R_1+R_2",diag:""},
+{cat:"Word Problems",term:"Consecutive integers",def:"x,x+1,x+2,… Even/odd consecutive: x,x+2,x+4,…",form:"consecutive: x, x+1, x+2",diag:""},
+{cat:"Sequences",term:"Arithmetic sequence",def:"Constant difference d. nth term and sum formulas.",form:"a_n = a_1 + (n-1)d   S_n = n(a_1 + a_n)/2",diag:"arithmetic_seq"},
+{cat:"Sequences",term:"Geometric sequence",def:"Constant ratio r. Each term = previous×r.",form:"a_n = a_1 × r^(n-1)",diag:"geo_seq"},
+{cat:"Word Problems",term:"Linear growth",def:"Fixed increase k each period from initial p.",form:"F_n=kn+p",diag:""},
+{cat:"Word Problems",term:"Word translations",def:"is=equals. more/older=add. less/fewer=subtract. times/of=multiply.",form:"is→=  more→+  less→−  of→×",diag:""},
+],
+questions:[
+{q:"Simple interest on $3000 at 6% for 2 years?",opts:["$180","$360","$600","$720"],ans:1,diag:"",exp:"I=3000×0.06×2=$360."},
+{q:"$1000 at 10% compounded annually for 2 years. Amount?",opts:["$1210","$1200","$1100","$1020"],ans:0,diag:"",exp:"A=1000(1.10)^2=1000×1.21=$1210."},
+{q:"A train travels 450 km in 5 hours. Speed?",opts:["75 km/h","100 km/h","90 km/h","80 km/h"],ans:2,diag:"",exp:"Speed=D/T=450/5=90 km/h."},
+{q:"80 miles at 40 mph, then 80 miles at 80 mph. Average speed?",opts:["53.3 mph","60 mph","50 mph","70 mph"],ans:0,diag:"",exp:"T1=80/40=2h; T2=80/80=1h. Avg=160/3≈53.3 mph."},
+{q:"Worker A finishes in 6 hrs, B in 3 hrs. Together?",opts:["4 hrs","3 hrs","2 hrs","1 hr"],ans:2,diag:"",exp:"Combined rate=1/6+1/3=1/6+2/6=3/6=1/2. Time=2 hrs."},
+{q:"Three consecutive integers sum to 48. Largest?",opts:["18","15","16","17"],ans:3,diag:"",exp:"x+(x+1)+(x+2)=48→3x+3=48→x=15. Largest=x+2=17."},
+{q:"Arithmetic: a_1=10, d=−3. What is a₆?",opts:["25","−3","−5","0"],ans:2,diag:"arithmetic_seq",exp:"a₆=10+(6−1)(−3)=10−15=−5."},
+{q:"Sum of arithmetic 1,4,7,10,13 (5 terms)?",opts:["40","35","30","45"],ans:1,diag:"",exp:"S_n=5/2(1+13)=5/2×14=35."},
+{q:"Geometric: 4,12,36,108,… 5th term?",opts:["324","216","648","432"],ans:0,diag:"geo_seq",exp:"r=3. a₅=4×3^4=4×81=324."},
+{q:"'Mike earns $12 more than twice Sam's $15.' Mike earns?",opts:["$42","$54","$27","$24"],ans:0,diag:"",exp:"Twice Sam=2×15=30. 12 more: 30+12=$42."},
+]},
+{id:6,title:"Ratios, Percents & Statistics",eyebrow:"Game 7 of 10",desc:"Ratios, percent change, mean, weighted average, median, SD, normal distribution, overlapping sets.",time:5,
+concepts:[
+{cat:"Ratios",term:"Ratios and part-to-whole",def:"a:b. Part a as fraction of total: a/(a+b).",form:"boys:girls=3:4 → boys/total=3/7",diag:""},
+{cat:"Percents",term:"Percent translations",def:"'of'=multiply. x% less than y=(1−x/100)y. x% more than y=(1+x/100)y.",form:"30% of 80=0.30×80=24",diag:""},
+{cat:"Percents",term:"Percent change",def:"Divide by the ORIGINAL value.",form:"(New−Old)/Old×100",diag:""},
+{cat:"Statistics",term:"Arithmetic mean",def:"sumx/n. Evenly spaced: mean=median=midpoint.",form:"Mean = sum(x) / n",diag:""},
+{cat:"Statistics",term:"Weighted average",def:"sum(value×weight)/sumweights. Pulls toward heavier group.",form:"WA = sum(v × w) / sum(w)",diag:""},
+{cat:"Statistics",term:"Median",def:"Middle value of ordered set. Even count: average two middle.",form:"Odd: (n+1)/2 position",diag:""},
+{cat:"Statistics",term:"Standard deviation",def:"Spread around mean. Add constant→SD unchanged. Multiply by k→SD×k.",form:"SD = sqrt(sum(x-mean)^2 / n)",diag:"normalcurve"},
+{cat:"Statistics",term:"Normal distribution",def:"68% within ±1 SD. 95% within ±2 SD. Mean=Median=Mode.",form:"68% within ±1 SD   95% within ±2 SD",diag:"normalcurve"},
+{cat:"Statistics",term:"Overlapping sets",def:"n(AORB)=n(A)+n(B)−n(AANDB).",form:"n(AORB)=n(A)+n(B)−n(AANDB)",diag:"venn2"},
+{cat:"Statistics",term:"Range",def:"Max−Min. Sensitive to outliers.",form:"Range=Max−Min",diag:""},
+],
+questions:[
+{q:"Ratio of red to blue balls is 2:5. 28 balls total. How many red?",opts:["10","4","8","14"],ans:2,diag:"",exp:"Red=2/(2+5)×28=2/7×28=8."},
+{q:"A price drops from $80 to $60. Percent decrease?",opts:["25%","20%","30%","15%"],ans:0,diag:"",exp:"(80−60)/80×100=20/80×100=25%."},
+{q:"Mean of: 8, 14, 6, 20, 12",opts:["14","12","10","8"],ans:1,diag:"",exp:"Sum=60. Mean=60/5=12."},
+{q:"Group X: 40 students avg 75. Group Y: 60 students avg 85. Combined avg?",opts:["80","81","82","83"],ans:1,diag:"",exp:"WA=(40×75+60×85)/100=(3000+5100)/100=8100/100=81."},
+{q:"Median of: 5,11,3,9,7,13 (sorted:3,5,7,9,11,13)?",opts:["7","9","8","11"],ans:2,diag:"",exp:"Even count: average 3rd and 4th: (7+9)/2=8."},
+{q:"All values in a set multiplied by 3. SD changes how?",opts:["Stays same","Triples","Increases by 3","Divides by 3"],ans:1,diag:"",exp:"Multiplying every value by k multiplies SD by k. SD×3."},
+{q:"Normal distribution: mean=70, SD=8. ~68% of data lies between:",opts:["54 and 86","66 and 74","62 and 78","60 and 80"],ans:2,diag:"normalcurve",exp:"68% within ±1 SD: 70±8 → 62 to 78."},
+{q:"40 study math, 30 study science, 15 study both. How many study at least one?",opts:["70","85","45","55"],ans:3,diag:"venn2",exp:"n(MORS)=40+30−15=55."},
+{q:"Dataset: 2,4,4,6,8,4,10. Mode?",opts:["6","4","8","2"],ans:1,diag:"",exp:"4 appears 3 times. Mode=4."},
+{q:"Range of: 7,19,3,25,11?",opts:["18","22","14","20"],ans:1,diag:"",exp:"Max=25, Min=3. Range=22."},
+]},
+{id:7,title:"Counting & Probability",eyebrow:"Game 8 of 10",desc:"Fundamental counting principle, permutations, combinations, circular arrangements, probability rules, complement, dependence.",time:5,
+concepts:[
+{cat:"Counting",term:"Fundamental counting principle",def:"Independent choices: multiply the options at each step.",form:"Total=m×n×p…",diag:""},
+{cat:"Counting",term:"Permutations",def:"Ordered arrangements. Order MATTERS.",form:"P(n,k)=n!/(n−k)!",diag:"perm_comb"},
+{cat:"Counting",term:"Combinations",def:"Unordered selections. Order does NOT matter.",form:"C(n,k)=n!/(k!(n−k)!)",diag:"perm_comb"},
+{cat:"Counting",term:"Repeated items",def:"Divide n! by the factorial of each repeated group.",form:"P=n!/(r_1!×r_2!…)",diag:""},
+{cat:"Counting",term:"Circular arrangements",def:"Fix one, arrange rest. Removes rotational duplicates.",form:"(n−1)!",diag:""},
+{cat:"Probability",term:"Basic probability",def:"P(E)=favorable/total. Always 0<=P<=1.",form:"P(E)=favorable/total",diag:"prob_basic"},
+{cat:"Probability",term:"Complementary events",def:"P(A)+P(not A)=1. 'At least one'=1−P(none).",form:"P(A)+P(Ac)=1",diag:""},
+{cat:"Probability",term:"Independent events (AND)",def:"P(A and B)=P(A)×P(B).",form:"P(AANDB)=P(A)×P(B)",diag:""},
+{cat:"Probability",term:"Mutually exclusive (OR)",def:"P(A or B)=P(A)+P(B). Not exclusive: subtract overlap.",form:"P(AORB)=P(A)+P(B)−P(AANDB)",diag:""},
+{cat:"Probability",term:"Dependent events",def:"P(A then B)=P(A)×P(B|A). 'Without replacement'=dependent.",form:"P(A and B)=P(A)×P(B|A)",diag:""},
+],
+questions:[
+{q:"3 routes from A to B; 4 routes from B to C. Trips A→B→C?",opts:["12","7","1","24"],ans:0,diag:"",exp:"Independent: 3×4=12."},
+{q:"How many ways can 5 books be arranged on a shelf?",opts:["120","25","60","20"],ans:0,diag:"",exp:"P(5,5)=5!=120."},
+{q:"Choose 2 from 6 people for a committee (order irrelevant)?",opts:["30","15","12","6"],ans:1,diag:"perm_comb",exp:"C(6,2)=6!/(2!4!)=(6×5)/2=15."},
+{q:"Arrange: A,A,B,B,B (5 letters, 2 A's and 3 B's)?",opts:["10","60","30","20"],ans:0,diag:"",exp:"5!/(2!×3!)=120/(2×6)=10."},
+{q:"5 people sit around a circular table. Distinct arrangements?",opts:["24","120","60","20"],ans:0,diag:"",exp:"Circular=(5−1)!=4!=24."},
+{q:"P(picking a vowel from A,B,C,D,E)?",opts:["1/5","3/5","4/5","2/5"],ans:3,diag:"prob_basic",exp:"Vowels: A,E → 2 out of 5. P=2/5."},
+{q:"P(at least one tail in 3 fair coin tosses)?",opts:["7/8","1/2","1/4","3/4"],ans:0,diag:"",exp:"P(no tails)=(1/2)^3=1/8. P(at least 1)=1−1/8=7/8."},
+{q:"P(rolling a 3 OR a 5 on a fair die)?",opts:["1/36","1/3","1/12","1/6"],ans:1,diag:"",exp:"Mutually exclusive: P(3)+P(5)=1/6+1/6=2/6=1/3."},
+{q:"Bag has 4 red, 2 blue. Draw 2 without replacement. P(both red)?",opts:["2/5","1/5","8/36","6/15"],ans:0,diag:"",exp:"P(1st red)=4/6. P(2nd red|1st red)=3/5. Product=12/30=2/5."},
+{q:"P(rolling 4 on die AND heads on coin)?",opts:["1/12","1/6","1/4","1/3"],ans:0,diag:"",exp:"Independent: P(4)=1/6, P(heads)=1/2. P=1/6×1/2=1/12."},
+]},
+{id:8,title:"Geometry",eyebrow:"Game 9 of 10",desc:"Pythagorean theorem, special right triangles, circles, polygons, 3D solids, coordinate geometry.",time:6,
+concepts:[
+{cat:"Geometry",term:"Pythagorean theorem",def:"a^2 + b^2 = c^2. Key triples: 3-4-5 and 5-12-13.",form:"a^2 + b^2 = c^2",diag:"pythagorean"},
+{cat:"Geometry",term:"45-45-90 triangle",def:"Legs x,x; hypotenuse x√2.",form:"legs x,x  hyp x√2",diag:"triangle4590"},
+{cat:"Geometry",term:"30-60-90 triangle",def:"Sides x:x√3:2x (short:long:hyp).",form:"x : x√3 : 2x",diag:"triangle3060"},
+{cat:"Geometry",term:"Area formulas",def:"Triangle:(1/2)bh. Parallelogram:bh. Trapezoid:1/2(b_1+b_2)h. Equilateral:(√3/4)s^2.",form:"Triangle: (1/2)bh  Trapezoid: (1/2)(b1+b2)h",diag:""},
+{cat:"Geometry",term:"Circles",def:"Area=pir^2. Circumference=2pir.",form:"A = pi×r^2  C = 2×pi×r",diag:"circle"},
+{cat:"Geometry",term:"Arc & sector",def:"Both are fractions of the full circle: central angle/360.",form:"Arc = (angle/360)×2pi×r  Sector = (angle/360)×pi×r^2",diag:""},
+{cat:"Geometry",term:"Interior angles of polygon",def:"Sum=(n−2)×180°. Exterior angles always sum to 360°.",form:"(n−2)×180°",diag:""},
+{cat:"Geometry",term:"3D solids",def:"Cube:V=s^3,SA=6s^2. Cylinder:V=pir^2h. Rect solid:V=LWH.",form:"Cube: V=s^3  Cylinder: V=pi×r^2×h",diag:""},
+{cat:"Coordinate Geometry",term:"Slope & y=mx+b",def:"m=rise/run=(y_2−y_1)/(x_2−x_1). Parallel:same m. Perpendicular:m_1m_2=−1.",form:"m=(deltay/deltax)  y=mx+b",diag:"slopeint"},
+{cat:"Coordinate Geometry",term:"Distance & midpoint",def:"Distance uses Pythagoras. Midpoint averages coordinates.",form:"d = sqrt((x2-x1)^2 + (y2-y1)^2)",diag:"coordinate"},
+],
+questions:[
+{q:"Right triangle: legs 8 and 15. Hypotenuse?",opts:["√161","23","17","20"],ans:2,diag:"pythagorean",exp:"8^2+15^2=64+225=289. √289=17. This is 8-15-17, a Pythagorean triple."},
+{q:"45-45-90 triangle: hypotenuse is 10. Leg length?",opts:["5√3","5√2","5","10√2"],ans:1,diag:"triangle4590",exp:"Hyp=leg×√2. Leg=10/√2=10√2/2=5√2."},
+{q:"30-60-90: long leg is 6√3. Short leg?",opts:["3√3","12","6","3"],ans:2,diag:"triangle3060",exp:"Long leg=short×√3. Short=6√3/√3=6."},
+{q:"Area of triangle with base 12 and height 7?",opts:["84","48","42","21"],ans:2,diag:"",exp:"Area=1/2×12×7=42."},
+{q:"Circle radius=5. Circumference?",opts:["25pi","5pi","15pi","10pi"],ans:3,diag:"circle",exp:"C=2pir=2pi(5)=10pi."},
+{q:"60° sector of circle r=6. Area of sector?",opts:["12pi","36pi","6pi","3pi"],ans:2,diag:"",exp:"Sector=(60/360)×pir^2=1/6×36pi=6pi."},
+{q:"Sum of interior angles of a heptagon (7 sides)?",opts:["1080°","720°","900°","840°"],ans:2,diag:"",exp:"(7−2)×180=5×180=900°."},
+{q:"Rectangular box: L=5,W=4,H=3. Volume?",opts:["47","60","94","70"],ans:1,diag:"",exp:"V=L×W×H=5×4×3=60."},
+{q:"Line through (−1,2) and (3,10). Slope?",opts:["3","4","1","2"],ans:3,diag:"slopeint",exp:"m=(10−2)/(3−(−1))=8/4=2."},
+{q:"Midpoint of (6,−4) and (−2,8)?",opts:["(4,4)","(2,2)","(4,2)","(2,4)"],ans:1,diag:"coordinate",exp:"M=((6+(−2))/2,(−4+8)/2)=(4/2,4/2)=(2,2)."},
+]},
+{id:9,title:"Functions, Sequences & Advanced Algebra",eyebrow:"Game 10 of 10",desc:"Domain & range, function notation, sequences, reflections, parallel/perpendicular, midpoint, units digit patterns.",time:5,
+concepts:[
+{cat:"Functions",term:"Domain & range",def:"Domain=valid inputs. Range=outputs. Exclude: div by 0, even roots of negatives.",form:"Domain→inputs  Range→outputs",diag:""},
+{cat:"Functions",term:"Function notation",def:"f(x): substitute input everywhere and evaluate.",form:"f(x)=x^2+1  →  f(3)=10",diag:""},
+{cat:"Sequences",term:"Arithmetic sequences — full",def:"Constant difference d. a_n=a_1+(n−1)d. S_n=n(a_1+a_n)/2.",form:"a_n=a_1+(n−1)d",diag:"arithmetic_seq"},
+{cat:"Sequences",term:"Geometric sequences — full",def:"Constant ratio r. a_n = a_1 × r^(n-1).",form:"a_n = a_1 × r^(n-1)",diag:"geo_seq"},
+{cat:"Coordinate Geometry",term:"Reflections",def:"x-axis:(x,−y). y-axis:(−x,y). Origin:(−x,−y).",form:"x-axis→y flips  y-axis→x flips",diag:"coordinate"},
+{cat:"Coordinate Geometry",term:"Parallel & perpendicular",def:"Parallel:same slope. Perpendicular:m_1×m_2=−1.",form:"Parallel:m_1=m_2  Perp:m_1m_2=−1",diag:"slopeint"},
+{cat:"Coordinate Geometry",term:"Midpoint",def:"Average the x-values and average the y-values.",form:"M=((x_1+x_2)/2,(y_1+y_2)/2)",diag:""},
+{cat:"Coordinate Geometry",term:"Diagonal of 3D solid",def:"Rectangular:sqrt(L^2 + W^2 + H^2). Cube:side√3.",form:"sqrt(L^2 + W^2 + H^2)",diag:""},
+{cat:"Algebra",term:"Counting integers (inclusive)",def:"b−a+1. For multiples: (largest−smallest)/k+1.",form:"Count a to b inclusive = b−a+1",diag:""},
+{cat:"Algebra",term:"Units digit patterns",def:"Powers of 2:2-4-8-6. Powers of 3:3-9-7-1. Powers of 7:7-9-3-1. Powers of 9:9-1.",form:"cycle for base 2: 2,4,8,6,2,4,8,6…",diag:""},
+],
+questions:[
+{q:"f(x)=x^2+2x−3. What is f(4)?",opts:["13","17","29","21"],ans:3,diag:"",exp:"f(4)=16+8−3=21."},
+{q:"Domain of f(x)=√(x−3)?",opts:["x<3","x!=3","all reals","x>=3"],ans:3,diag:"",exp:"Square root requires x−3>=0, so x>=3."},
+{q:"Arithmetic: a_1=−2, d=6. Find a_1₀.",opts:["40","46","52","58"],ans:2,diag:"arithmetic_seq",exp:"a_1₀=−2+(10−1)×6=−2+54=52."},
+{q:"Arithmetic: 3,7,11,15,19. Sum of 5 terms?",opts:["45","35","65","55"],ans:3,diag:"",exp:"S_n=5/2(3+19)=5/2×22=55."},
+{q:"Geometric: 1,−2,4,−8,… 6th term?",opts:["32","−32","16","−16"],ans:1,diag:"geo_seq",exp:"r=−2. a₆=1×(−2)^(6−1)=(−2)^5=−32."},
+{q:"Point (5,3) reflected over y-axis gives:",opts:["(5,−3)","(3,5)","(−5,3)","(−5,−3)"],ans:2,diag:"coordinate",exp:"y-axis reflection: x changes sign. (5,3)→(−5,3)."},
+{q:"A line y=−2x+7 is perpendicular to a line with slope:",opts:["1/2","−2","−1/2","2"],ans:0,diag:"slopeint",exp:"Perpendicular: m_1×m_2=−1. (−2)×m_2=−1. m_2=1/2."},
+{q:"Midpoint of (−3,4) and (7,−2)?",opts:["(5,1)","(2,3)","(2,1)","(4,2)"],ans:2,diag:"",exp:"M=((-3+7)/2,(4+(−2))/2)=(4/2,2/2)=(2,1)."},
+{q:"How many integers from 11 to 89 inclusive?",opts:["78","80","77","79"],ans:3,diag:"",exp:"89−11+1=79."},
+{q:"Units digit of 7^4^2?",opts:["1","7","9","3"],ans:2,diag:"",exp:"Powers of 7 cycle: 7,9,3,1 (period 4). 42÷4=10 remainder 2. The 2nd in the cycle is 9. So the units digit of 7^42 is 9."},
+]},
+]; // end GAMES
+
+// ══════════════════════════════════════════════════════════════════
+// ══ STATE ══
+let curGame=null, li=0, ltick, qi=0, qtimer, qsecs, answers=[], qstart, picked=false;
+const scores={};
+let sessMode='study', sessConceptSecs=15, sessQuizMins=5;
+
+// ══ SETTINGS ══
+function selectMode(m){
+  sessMode=m;
+  document.getElementById('mode-study').classList.toggle('selected',m==='study');
+  document.getElementById('mode-test').classList.toggle('selected',m==='test');
+  document.getElementById('sett-concept-time').style.display=m==='study'?'none':'block';
+  updateSettSummary();
+}
+function onConceptSlider(val){
+  val=parseInt(val);
+  sessConceptSecs=val;
+  const display=val===0?'∞ Unlimited':val<60?val+'s':Math.floor(val/60)+'m'+(val%60?' '+val%60+'s':'');
+  document.getElementById('concept-time-display').textContent=display;
+  // Update slider fill gradient
+  const pct=((val-2)/(90-2)*100).toFixed(1)+'%';
+  document.getElementById('concept-slider').style.setProperty('--pct',pct);
+  // Deselect all chips (slider is now authoritative)
+  document.querySelectorAll('#concept-chips .chip').forEach(c=>c.classList.remove('selected'));
+  // Highlight matching chip if exact match
+  document.querySelectorAll('#concept-chips .chip').forEach(c=>{
+    const cv=parseInt(c.getAttribute('data-val'));
+    if(cv===val)c.classList.add('selected');
+  });
+  updateSettSummary();
+}
+
+function setConceptTime(secs,el){
+  sessConceptSecs=secs;
+  document.querySelectorAll('#concept-chips .chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  // Sync slider (clamp to range; unlimited = 90 max visually)
+  const sliderEl=document.getElementById('concept-slider');
+  const displayEl=document.getElementById('concept-time-display');
+  if(secs===0){
+    sliderEl.value=90;
+    const pct='100%';
+    sliderEl.style.setProperty('--pct',pct);
+    displayEl.textContent='∞ Unlimited';
+  } else {
+    sliderEl.value=secs;
+    const pct=((secs-2)/(90-2)*100).toFixed(1)+'%';
+    sliderEl.style.setProperty('--pct',pct);
+    displayEl.textContent=secs<60?secs+'s':Math.floor(secs/60)+'m'+(secs%60?' '+secs%60+'s':'');
+  }
+  updateSettSummary();
+}
+function selectQuizTime(mins,el){
+  sessQuizMins=mins;
+  document.querySelectorAll('#quiz-chips .chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  updateSettSummary();
+}
+function updateSettSummary(){
+  const mode=sessMode==='study'?'📖 Study (self-paced)':'⏱️ Test (timed)';
+  const ct=sessMode==='study'?'Manual — you control pace':sessConceptSecs===0?'Unlimited':sessConceptSecs+'s each';
+  const qt=sessQuizMins===0?'No time limit':sessQuizMins+' min';
+  document.getElementById('sett-summary').innerHTML=
+    '<div class="sett-sum-item">Mode: <strong>'+mode+'</strong></div>'+
+    '<div class="sett-sum-item">Concepts: <strong>'+ct+'</strong></div>'+
+    '<div class="sett-sum-item">Quiz limit: <strong>'+qt+'</strong></div>';
+}
+
+// ══ HUB ══
+function renderHub(){
+  const grid=document.getElementById('gamesGrid');
+  grid.innerHTML='';
+  GAMES.forEach(g=>{
+    const done=scores[g.id]!==undefined;
+    const card=document.createElement('div');
+    card.className='game-card'+(done?' done':'');
+    card.innerHTML=
+      '<div class="game-card-accent"></div>'+
+      '<span class="game-card-num-badge">'+(g.id+1)+' of '+GAMES.length+'</span>'+
+      '<div class="game-card-body">'+
+        '<div class="game-num">'+g.eyebrow+'</div>'+
+        '<div class="game-title">'+g.title+'</div>'+
+        '<div class="game-topics">'+g.desc+'</div>'+
+      '</div>'+
+      '<div class="game-card-footer">'+
+        '<span class="game-meta">'+g.concepts.length+' concepts · '+g.questions.length+' questions</span>'+
+        '<span class="game-badge">'+(done?'✓ '+scores[g.id]+'%':'Play →')+'</span>'+
+      '</div>';
+    card.onclick=()=>openSettings(g.id);
+    grid.appendChild(card);
+  });
+}
+
+// ══ NAVIGATION ══
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function showPhase(id){['ph-intro','ph-learn','ph-ready','ph-quiz','ph-results'].forEach(p=>{document.getElementById(p).style.display='none';});document.getElementById(id).style.display='block';window.scrollTo(0,0);}
+function goHub(){clearInterval(ltick);clearInterval(qtimer);renderHub();showScreen('hub');}
+function goSettingsFromGame(){clearInterval(ltick);clearInterval(qtimer);showScreen('settings');}
+
+// ══ OPEN SETTINGS ══
+function openSettings(id){
+  curGame=GAMES[id];
+  document.getElementById('sett-game-title').textContent=curGame.title;
+  selectMode('study');
+  // Init slider to default 15s
+  setConceptTime(15, document.querySelector('#concept-chips .chip[data-val="15"]'));
+  updateSettSummary();
+  showScreen('settings');
+}
+
+// ══ LAUNCH ══
+function launchGame(){
+  const mb=document.getElementById('topbarMode');
+  mb.textContent=sessMode==='study'?'📖 Study':'⏱️ Test';
+  mb.className='topbar-mode-badge '+(sessMode==='study'?'study':'test');
+  const timerEl=document.getElementById('topbarTimer');
+  timerEl.style.display=(sessMode==='test'&&sessQuizMins>0)?'block':'none';
+  document.getElementById('topbarTitle').textContent=curGame.title;
+  document.getElementById('intro-eyebrow').textContent=curGame.eyebrow;
+  document.getElementById('intro-title').textContent=curGame.title;
+  document.getElementById('intro-desc').textContent=curGame.desc;
+  document.getElementById('intro-ccount').textContent=curGame.concepts.length;
+  document.getElementById('intro-qcount').textContent=curGame.questions.length;
+  if(sessMode==='study'){
+    document.getElementById('intro-time-display').textContent='Self';
+    document.getElementById('intro-time-label').textContent='paced';
+  } else {
+    document.getElementById('intro-time-display').textContent=sessQuizMins===0?'∞':sessQuizMins;
+    document.getElementById('intro-time-label').textContent=sessQuizMins===0?'no limit':'min quiz';
+  }
+  const ct=sessMode==='study'?'Manual pace':sessConceptSecs===0?'Unlimited per concept':sessConceptSecs+'s per concept';
+  const qt=sessMode==='study'?'No time limit':sessQuizMins===0?'No time limit':sessQuizMins+' min quiz';
+  document.getElementById('intro-sett-summary').innerHTML=
+    '<strong>'+(sessMode==='study'?'📖 Study':'⏱️ Test')+' mode</strong>'+
+    ' · <span>'+ct+'</span>'+
+    ' · <span>'+qt+'</span>';
+  showScreen('game');
+  showPhase('ph-intro');
+}
+
+// ══ LEARN ══
+function startLearn(){li=0;showPhase('ph-learn');showConcept();}
+
+function showConcept(){
+  if(li>=curGame.concepts.length){clearInterval(ltick);showReadyPhase();return;}
+  const c=curGame.concepts[li];
+  document.getElementById('cc-cat').textContent=c.cat;
+  document.getElementById('cc-term').textContent=c.term;
+  document.getElementById('cc-def').textContent=c.def;
+  const fEl=document.getElementById('cc-formula');
+  if(c.form){fEl.textContent=c.form;fEl.style.display='inline-block';}else{fEl.style.display='none';}
+  document.getElementById('cc-diagram').innerHTML=c.diag&&D[c.diag]?D[c.diag]:'';
+  document.getElementById('learn-ctr').textContent='Concept '+(li+1)+' of '+curGame.concepts.length;
+  document.getElementById('learn-bar').style.width=(li/curGame.concepts.length*100)+'%';
+  const sn=document.getElementById('study-nav');
+  const ah=document.getElementById('auto-hint');
+  if(sessMode==='study'){
+    sn.style.display='flex'; ah.style.display='none';
+    document.getElementById('learn-tick').textContent='📖';
+    clearInterval(ltick);
+    const pb=document.querySelector('.btn-prev');
+    if(pb){pb.disabled=(li===0);pb.style.opacity=li===0?'0.4':'1';}
+  } else {
+    sn.style.display='none'; ah.style.display='block';
+    if(sessConceptSecs===0){
+      document.getElementById('learn-tick').textContent='∞';
+      clearInterval(ltick);
+    } else {
+      let s=sessConceptSecs;
+      const fmt=v=>v<60?v+'s':Math.floor(v/60)+'m'+(v%60?' '+v%60+'s':'');
+      document.getElementById('learn-tick').textContent=fmt(s);
+      clearInterval(ltick);
+      ltick=setInterval(()=>{s--;document.getElementById('learn-tick').textContent=fmt(s);if(s<=0){clearInterval(ltick);li++;showConcept();}},1000);
+    }
+  }
+}
+function nextConcept(){clearInterval(ltick);li++;showConcept();}
+function prevConcept(){if(li>0){clearInterval(ltick);li--;showConcept();}}
+
+// ══ READY ══
+function showReadyPhase(){
+  const q=curGame.questions.length;
+  if(sessMode==='study'){
+    document.getElementById('ready-desc').textContent=q+' questions — take your time. Explanations shown after each answer.';
+  } else {
+    const t=sessQuizMins===0?'no time limit':sessQuizMins+' minute'+(sessQuizMins>1?'s':'')+' on the clock';
+    document.getElementById('ready-desc').textContent=q+' questions — '+t+'. Good luck.';
+  }
+  showPhase('ph-ready');
+}
+
+// ══ QUIZ ══
+function startQuiz(){
+  qi=0;answers=[];picked=false;qstart=Date.now();
+  showPhase('ph-quiz');renderQ();
+  clearInterval(qtimer);
+  if(sessMode==='test'&&sessQuizMins>0){
+    qsecs=sessQuizMins*60;
+    const el=document.getElementById('topbarTimer');
+    el.style.display='block';
+    el.textContent=sessQuizMins+':00';
+    qtimer=setInterval(()=>{
+      qsecs--;
+      const m=Math.floor(qsecs/60),s=qsecs%60;
+      el.textContent=m+':'+(s<10?'0':'')+s;
+      el.className='topbar-timer'+(qsecs<=30?' urgent':'');
+      if(qsecs<=0){clearInterval(qtimer);finishQuiz();}
+    },1000);
+  }
+}
+
+const LETTERS=['A','B','C','D'];
+function renderQ(){
+  if(qi>=curGame.questions.length){clearInterval(qtimer);finishQuiz();return;}
+  picked=false;
+  document.getElementById('study-next-btn').style.display='none';
+  document.getElementById('study-exp').style.display='none';
+  const q=curGame.questions[qi];
+  document.getElementById('q-ctr').textContent='Q '+(qi+1)+' of '+curGame.questions.length;
+  document.getElementById('q-bar').style.width=(qi/curGame.questions.length*100)+'%';
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-hint').textContent='';
+  document.getElementById('q-diagram').innerHTML=q.diag&&D[q.diag]?D[q.diag]:'';
+  const wrap=document.getElementById('q-opts');
+  wrap.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML='<span class="opt-lbl">'+LETTERS[i]+'</span>'+o;
+    btn.onclick=()=>pickAnswer(i);
+    wrap.appendChild(btn);
+  });
+}
+
+function pickAnswer(i){
+  if(picked)return;picked=true;
+  const q=curGame.questions[qi];
+  const ok=i===q.ans;
+  answers.push({ok,qi});
+  document.querySelectorAll('.opt').forEach((b,idx)=>{
+    b.disabled=true;
+    if(idx===q.ans)b.classList.add('correct');
+    else if(idx===i&&!ok)b.classList.add('wrong');
+  });
+  document.getElementById('q-hint').textContent=ok?'✓ Correct!':'✗ Correct answer highlighted.';
+  if(sessMode==='study'){
+    const expEl=document.getElementById('study-exp');
+    expEl.textContent=q.exp;expEl.style.display='block';
+    const nb=document.getElementById('study-next-btn');
+    nb.style.display='block';
+    nb.textContent=qi+1<curGame.questions.length?'Next question →':'See results →';
+  } else {
+    setTimeout(()=>{qi++;renderQ();},1400);
+  }
+}
+function studyNextQ(){qi++;renderQ();}
+
+// ══ RESULTS ══
+function finishQuiz(){
+  clearInterval(qtimer);
+  const elapsed=Math.round((Date.now()-qstart)/1000);
+  const cor=answers.filter(a=>a.ok).length;
+  const pct=Math.round(cor/curGame.questions.length*100);
+  scores[curGame.id]=pct;
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('s-msg').textContent=pct>=80?'Excellent — GRE-ready on this topic.':pct>=60?'Good. Review the concepts you missed.':'Keep studying — review the flashcards and try again.';
+  document.getElementById('m-cor').textContent=cor;
+  document.getElementById('m-wrg').textContent=curGame.questions.length-cor;
+  const es=elapsed%60;
+  document.getElementById('m-tim').textContent=Math.floor(elapsed/60)+':'+(es<10?'0':'')+es;
+  const list=document.getElementById('revlist');list.innerHTML='';
+  curGame.questions.forEach((q,i)=>{
+    const a=answers.find(x=>x.qi===i);const ok=a&&a.ok;
+    const d=document.createElement('div');d.className='rev-item';
+    d.innerHTML='<div class="rev-dot '+(ok?'ok':'bad')+'"></div><div style="flex:1">'+
+      '<div class="rev-q">'+q.q+'</div>'+
+      '<div class="rev-ans'+(ok?'':' missed')+'">'+(ok?'Correct — '+q.opts[q.ans]:'Missed — '+q.opts[q.ans])+'</div>'+
+      '<div class="rev-exp">'+q.exp+'</div></div>';
+    list.appendChild(d);
+  });
+  showPhase('ph-results');
+}
+function restartGame(){clearInterval(ltick);clearInterval(qtimer);showScreen('settings');}
+
+// ══ INIT ══
+renderHub();
+</script>
+</body>
+</html>
